@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head><meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>GraphHub</title>
+    <meta name="description" content=""></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"></meta>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon"></link>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css"></link>
+    <!-- Fonts  -->
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css"></link>
+    <link rel="stylesheet" href="assets/css/simple-line-icons.css"></link>
+    <!-- CSS Animate -->
+    <link rel="stylesheet" href="assets/css/animate.css"></link>
+    <!-- DataTables-->
+    <!-- <link rel="stylesheet" href="assets/plugins/dataTables/css/dataTables.css"> -->
+    <link rel="stylesheet" type="text/css" href="table/css/dataTables.bootstrap.css"></link>
+    <!-- Switchery -->
+    <link rel="stylesheet" href="assets/plugins/switchery/switchery.min.css"></link>
+    <!-- Custom styles for this theme -->
+    <link rel="stylesheet" href="assets/css/main.css"></link>
+    <!-- Feature detection -->
+    <script src="assets/js/vendor/modernizr-2.6.2.min.js"></script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/vendor/html5shiv.js"></script>
+    <script src="assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+    
+    <style>
+     .node { stroke: #222; stroke-width: 1.5px; }
+    .node.B { fill: #ff0000; }
+    .node.C { fill: #37ff00; }
+	.node.P { fill: #ff68fb; }
+	.node.Per { fill: #fff50d; }
+	.node.Com { fill: #fff50d; }
+	.node.Com.xiaodai { fill: #d94600; }
+	.node.Com.dichan { fill: #8600ff; }
+    .link { stroke: #999; stroke-opacity: .6; /*stroke-width: 1; IE 浏览器爆炸*/fill:none;}
+	.link.DB{stroke:#8B0000;}
+	.link.JY{stroke:#757575;}
+	.link.DK{stroke:#1F7CF3;}
+	.link.DY{stroke:#EEAD0E;}
+	.link.ZDB{stroke:#20B2AA;}
+	.link.GL{stroke:#7D26CD;}
+	.text{fill:black;font-size:8px;"text-anchor":"middle";}
+	.arc{fill:#d2d5da;}
+	.link.shadow:hover{opacity:1;stroke:#87D489;}
+    </style></head>
+    
+<body>
+    <section id="main-wrapper" class="theme-green-full">
+        <header id="header">
+         <ul class="nav navbar-nav navbar-left">
+                <li class="toggle-navigation toggle-left">
+                    <button class="sidebar-toggle" id="toggle-left">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </li>
+                
+            </ul>
+            <!--logo start-->
+            <div class="brand col-md-6 col-md-offset-5">
+                <a href="new_index.html" class="logo" style="text-transform:capitalize;">
+                    <i class="icon-layers"></i>
+                    Graphub</a>
+            </div>
+            <!--logo end-->
+           
+            <ul class="nav navbar-nav navbar-right">
+            	<li class="toggle-profile hidden-xs">
+                    <button type="button" class="btn btn-default" id="toggle-profile">
+                        <i class="icon-user"></i>
+                    </button>
+                </li>
+                
+                 <li class="toggle-fullscreen hidden-xs">
+                    <button type="button" class="btn btn-default expand" id="toggle-fullscreen">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                </li>
+                
+            </ul>
+        </header>
+        
+        <!--sidebar left start-->
+        <aside class="sidebar sidebar-left">
+
+            <nav style="margin-top: 10px;">
+               <!--  <h5 class="sidebar-header">导航栏</h5> -->
+                <ul class="nav nav-pills nav-stacked">
+                    <li class=" active">
+                        <a href="new_index.html" title="HomePage">
+                            <i class="fa  fa-fw fa-tachometer"></i> 主页
+                        </a>
+                    </li>
+                    <li class="nav-dropdown">
+                        <a href="LoadData.html" title="ETL">
+                            <i class="fa  fa-fw fa-cogs"></i> 数据导入
+                        </a>
+                    </li>
+                    <li class="nav-dropdown">
+                        <a href="GraphBrowse.html" title="GraphBrowse">
+                            <i class="fa  fa-fw fa-th-list"></i> 图谱浏览
+                        </a>
+                    </li>
+                    <li class="nav-dropdown">
+                        <a href="#" title="AnalyticModel">
+                            <i class="fa fa-fw fa-bar-chart-o"></i> 分析模型
+                        </a>
+                        <ul class="nav-sub">
+                            <li>
+                                <a href="QueryModel.html" title="QueryModel">
+                                    查询模型
+                                </a>
+                            </li>
+                            <li>
+                                <a href="TraversalModel.html" title="TraversalModel">
+                                     遍历模型
+                                </a>
+                            </li>
+                            <li>
+                                <a href="StatisticsModel.html" title="StatisticsModel">
+                                     统计模型
+                                </a>
+                            </li>
+                            <li>
+                                <a href="LearnModel.html" title="LearnModel">
+                                     学习模型
+                                </a>
+                            </li>
+                            <li>
+                                <a href="MiningModel.html" title="MiningModel">
+                                     挖掘模型
+                                </a>
+                            </li>
+                        </ul>
+                    </li> 
+                    <li class="nav-dropdown">
+                        <a href="GraphHubManager" title="GraphEdit">
+                            <i class="fa  fa-fw fa-edit"></i> 平台管理
+                        </a>
+                        <ul class="nav-sub">
+                            <li>
+                                <a href="#" title="Schema Edit">
+                                    模式修改
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="Graph Edit">
+                                     图谱修改
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                 
+                    
+                </ul>
+            </nav>
+            
+        </aside>
+        <!--sidebar left end-->
+        
+        
+        <!--main content start-->
+        <section class="main-content-wrapper">
+
+            <section id="main-content" class="animated fadeInUp">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+						<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">数据库模式</h3> 
+                                <div class="actions pull-right">
+                                	<i class="fa fa-expand"></i>
+                                    <i class="fa fa-chevron-down"></i>
+                                    <!-- <i class="fa fa-times"></i> -->
+                                </div>
+                            </div>
+                            <div class="panel-body" >
+                                <div class="tab-wrapper tab-left ">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#graph" data-toggle="tab">图视图</a>
+                                        </li>
+                                      
+                                    </ul>
+                                    <div class="tab-content" style="height: 500px">
+                                        <div class="tab-pane active" id="graph">
+                                            
+                                        </div>
+                                        <div class="tab-pane" id="tableView1">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">平台信息</h3>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-expand"></i>
+                                    <i class="fa fa-chevron-down"></i>
+                                   <!--  <i class="fa fa-times"></i> -->
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="platformInfo" class="table table-striped table-hover table-bordered" style="width:100%">
+				   					 <thead style="display:none">
+				   					 </thead>
+				    				 <tbody>
+				    				 </tbody>
+				   				 </table>
+                            </div>
+                        </div>
+                    </div>
+                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">模式统计</h3>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-expand"></i>
+                                    <i class="fa fa-chevron-down"></i>
+                                 <!--    <i class="fa fa-times"></i> -->
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table id="detail" class="table table-striped table-hover table-bordered" style="width:100%">
+				   					 <thead>
+				   							 <tr><th class="text-center">序号</th><th class="text-center">名称</th><th class="text-center">类别</th><th class="text-center">数量</th></tr>
+				   					 </thead>
+				    				 <tbody>
+				    				 </tbody>
+				   				 </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">图谱度量</h3>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-expand"></i>
+                                    <i class="fa fa-chevron-down"></i>
+                                  <!--   <i class="fa fa-times"></i> -->
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <!--main content end-->
+    </section>
+
+
+    <!--Global JS-->
+    <script src="assets/js/vendor/jquery-1.11.1.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/navgoco/jquery.navgoco.min.js"></script>
+    <script src="assets/plugins/pace/pace.min.js"></script>
+    <script src="assets/plugins/fullscreen/jquery.fullscreen-min.js"></script>
+    <script src="assets/js/src/app.js"></script>
+    <!--  -->
+    <script type="text/javascript" src="laydate/laydate.js"></script>
+	<script type="text/javascript" src="javascripts/d3.js"></script>
+	<script type="text/javascript" src="javascripts/wy.js"></script>
+	<script type="text/javascript" src="javascripts/dx.js"></script>
+	<script type="text/javascript" src="javascripts/srf.js"></script>
+	<script type="text/javascript" src="javascripts/util.js"></script>
+	<script type="text/javascript" src="javascripts/savePNG.js"></script>
+<!--     
+    <script src="assets/plugins/dataTables/js/jquery.dataTables.js"></script>
+    <script src="assets/plugins/dataTables/js/dataTables.bootstrap.js"></script>
+     -->
+    
+    <script type="text/javascript" src="table/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="table/js/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" src="table/js/dataTables.buttons.js"></script>
+	<script type="text/javascript" src="table/js/buttons.bootstrap.js"></script>
+	<script type="text/javascript" src="table/js/jszip.js"></script>
+	<script type="text/javascript" src="table/js/buttons.html5.js"></script>
+
+    
+    <!-- Switch -->
+    <script src="assets/plugins/switchery/switchery.min.js"></script>
+    <!--Load these page level functions-->
+    <script>
+    $(document).ready(function() {
+        //app.dateRangePicker();
+        //app.chartJs();
+        //app.weather();
+        getNeo4jDetail();
+        getNeo4jInfo();
+        getNeo4jSchema();
+        //app.spinStart();
+        //app.spinStop();
+    });
+    </script>
+</body>
+
+</html>

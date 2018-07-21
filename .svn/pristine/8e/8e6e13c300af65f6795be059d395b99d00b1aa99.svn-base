@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>GraphHub</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/img/favicon.ico" type="image/x-icon">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/assets/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- DataTables-->
+    <link rel="stylesheet" href="/assets/plugins/dataTables/css/dataTables.css">
+    <link rel="stylesheet" type="text/css" href="/table/css/dataTables.bootstrap.css"> 
+    <!-- Fonts  -->
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/simple-line-icons.css">
+    <!-- CSS Animate -->
+    <link rel="stylesheet" href="/assets/css/animate.css">
+    <!--Page Level CSS-->
+    <link rel="stylesheet" href="/assets/plugins/icheck/css/all.css">
+    <!-- Switchery -->
+    <link rel="stylesheet" href="/assets/plugins/switchery/switchery.min.css">
+    <!-- Custom styles for this theme -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <!-- Feature detection -->
+    <script src="/assets/js/vendor/modernizr-2.6.2.min.js"></script>
+
+    <style type="text/css">
+        .col-md-0{
+            display: none;
+        }
+	  	.node { stroke: #222; stroke-width: 1.5px; }
+	    .node.B { fill: #ff0000; }
+	    .node.C { fill: #37ff00; }
+		.node.P { fill: #ff68fb; }
+		.node.Per { fill: #fff50d; }
+		.node.Com { fill: #fff50d; }
+		.node.Com.xiaodai { fill: #d94600; }
+		.node.Com.dichan { fill: #8600ff; }
+	    .link { stroke: #999; stroke-opacity: .6; /*stroke-width: 1; IE 浏览器爆炸*/fill:none;}
+		.link.DB{stroke:#8B0000;}
+		.link.JY{stroke:#757575;}
+		.link.DK{stroke:#1F7CF3;}
+		.link.DY{stroke:#EEAD0E;}
+		.link.ZDB{stroke:#20B2AA;}
+		.link.GL{stroke:#7D26CD;}
+		.text{fill:black;font-size:8px;"text-anchor":"middle";}
+		.arc{fill:#d2d5da;}
+		.link.shadow:hover{opacity:1;stroke:#87D489;}
+		.main-content-wrapper #main-content {
+		    padding: 0 15px 0 15px;
+		    width: 100%;
+		}
+		.myform{
+			width: 100%;
+		    padding-left: 5px;
+		    padding-right: 5px;
+		    padding-top: 0;
+		    padding-bottom: 5px;
+		}
+		.col-md-2,.col-md-8,.col-md-10,.col-md-12{
+			padding-left: 5px;
+		    padding-right: 5px;
+		}
+		#center_part .panel-body .tab-wrapper{
+			margin-bottom:0;
+		}
+		#center_part .panel-body .tab-content{
+			/* height:800px; */
+			/* overflow-y:hidden; */
+		}
+		.isClicked{
+			background: #717172;
+		}
+		.modal-dialog1 {  margin: 20% 50%;  } 
+		.table tbody tr td{
+			/* table-layout:fixed; *//*表格宽度固定*/
+			word-wrap: break-word;/*换行*/
+			word-break:break-all;/*换行*/
+			text-align:center;/*文字水平居中*/
+            vertical-align: middle;/*垂直居中*/
+        }
+        .form-control{
+        	border: 2px solid black;
+        }
+        
+        ::selection {
+			background:#6C6;
+			color:#fff;
+		}
+		table pre{
+			background-color:transparent;
+			border: 0px solid #ccc;
+		}
+		#nodeInfo,#nodeSize{
+			text-transform:none;
+		}
+		
+    </style>
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/vendor/html5shiv.js"></script>
+    <script src="assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <section id="main-wrapper" class="theme-green-full">
+    	<header id="header">
+        	<ul class="nav navbar-nav navbar-left">
+                <li class="toggle-navigation toggle-left">
+                    <button class="sidebar-toggle" id="toggle-left">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </li>
+                
+            </ul>
+            <!--logo start-->
+            <div class="brand col-md-6 col-md-offset-5">
+                <a href="new_index.html" class="logo" style="text-transform:capitalize;">
+                    <i class="icon-layers"></i>GraphX</a>
+            </div>
+            <!--logo end-->
+           
+            <ul class="nav navbar-nav navbar-right">
+            	<li class="toggle-profile hidden-xs">
+                    <button type="button" class="btn btn-default" id="toggle-profile">
+                        <a href="loginRequest">
+                    		<i class="icon-user"></i>
+                    	</a>
+                    </button>
+                </li>
+                
+                 <li class="toggle-fullscreen hidden-xs">
+                    <button type="button" class="btn btn-default expand" id="toggle-fullscreen">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                </li>
+                
+            </ul>
+        </header>
+
+ <!--sidebar left start-->
+        <aside class="sidebar sidebar-left">
+            <nav style="margin-top: 10px;">
+               <!--  <h5 class="sidebar-header">导航栏</h5> -->
+                <ul class="nav nav-pills nav-stacked">
+                
+                    <li class=" nav-dropdown">
+                        <a href="new_index.html" title="HomePage">
+                            <i class="fa  fa-fw fa-tachometer"></i> 主页
+                        </a>
+                    </li>
+                    
+                    <li class="nav-dropdown">
+                        <a href="LoadData.html" title="ETL">
+                            <i class="fa  fa-fw fa-cogs"></i> 数据导入
+                        </a>
+                    </li>
+                    
+                    <li class="nav-dropdown">
+                        <a href="GraphBrowse.html" title="GraphBrowse">
+                            <i class="fa  fa-fw fa-th-list"></i> 图谱浏览
+                        </a>
+                    </li>
+                    
+                    <li class="nav-dropdown">
+                        <a href="#" title="AnalyticModel">
+                            <i class="fa fa-fw fa-bar-chart-o"></i> 分析模型
+                        </a>
+                        <ul class="nav-sub">
+                            <li><a href="QueryModel.html" title="QueryModel">查询模型</a> </li>
+                            <li><a href="TraversalModel.html" title="TraversalModel">遍历模型</a></li>
+                            <li><a href="StatisticsModel.html" title="StatisticsModel"> 统计模型 </a></li>
+                            <li><a href="LearnModel.html" title="LearnModel">学习模型</a></li>
+                            <li><a href="MiningModel.html" title="MiningModel">挖掘模型</a></li>
+                        </ul>
+                    </li> 
+                    
+                   <li class=" active">
+                        <a href="/GraphHubManager" title="GraphEdit">
+                            <i class="fa  fa-fw fa-edit"></i> 平台管理
+                        </a>
+                    </li>
+                    
+                </ul>
+           </nav>
+        </aside>
+            <section class="main-content-wrapper">
+
+            <section id="main-content" class="animated fadeInUp">
+                <div class="row">
+                    <div id="left_part" class="col-md-2 col-sm-12 col-xs-12 col-lg-2 animated fadeInUp" >
+                         <aside class="panel">
+                            <div class="panel-heading">
+                                <!-- <h3 class="panel-title">保存</h3> -->
+                                <i class="fa fa-star"></i>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-expand"></i>
+                                    <i class="fa fa-chevron-down"></i>
+                                    <i class="fa fa-times-circle"></i>
+                                </div>
+                            </div>
+                             <aside class="panel-body">
+                                <button class="btn btn-info btn-block"><a th:href="@{/Neo4jList}" >图数据库</a></button>
+                                <ul id="my_save" class="nav nav-pills nav-stacked compose-nav" style="height:350px;overflow-y:auto">
+                                </ul>
+                                <button class="btn btn-default btn-block"><a th:href="@{/GraphXList}" >图计算引擎</a></button>
+                                <ul id="my_history" class="nav nav-pills nav-stacked compose-nav" style="height:350px;overflow-y:auto">
+                                </ul>
+                            </aside>
+                         </aside>
+                     
+                     </div> 
+                     <!--中央panel -->
+                     <div id="centrt_panel" class="col-md-10 col-sm-12 col-xs-12 col-lg-10 animated fadeInUp">
+
+                         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 animated fadeInUp">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <h3 class="panel-title">修改GraphX</h3>
+                                            <div class="actions pull-right">
+                                                <i class="fa fa-expand"></i>
+                                                <i class="fa fa-chevron-down"></i>
+                                                <i class="fa fa-times"></i>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <section class="fuelux">
+                                                <div id="MyWizard" class="wizard">
+
+                                                </div>
+                                                <div class="step-content">
+                                                    <div class="step-pane active" id="step1">
+                                                            <div class="form-group">
+
+                                                            </div>
+                                                            <div  class="panel panel-default">
+
+                                                                <div id="data_source_1" class="panel-body">
+																	<form id="formTag" th:action="@{/GraphXPost}" method="post" class="form-horizontal" enctype="multipart/form-data">                  	
+										                       			
+										                       			<input type="hidden" name="graphX_id" th:value="${graphX.graphX_id}"/>
+										                       			
+										                                <div class="form-group"><label class="col-sm-2 control-label">GraphX的名称：</label>
+										                                    <div class="col-sm-10">
+										                                    	<input id="title" name="graphX_name" type="text" th:value="${graphX.graphX_name}" class="form-control"/>
+										                                    </div>
+										                                </div>
+										                                
+										                                <div class="form-group"><label class="col-sm-2 control-label">GraphX的IP：</label>
+										                                    <div class="col-sm-10">
+										                                    	<input id="title" name="graphX_ip" type="text" th:value="${graphX.graphX_ip}" class="form-control"/>
+										                                    </div>
+										                                </div>
+										                                
+										                                <div class="form-group"><label class="col-sm-2 control-label">GraphX的端口：</label>
+										                                    <div class="col-sm-10">
+										                                    	<input id="title" name="graphX_port" type="text" th:value="${graphX.graphX_port}" class="form-control"/>
+										                                    </div>
+										                                </div>
+										                                
+										                                <input type="hidden" name="user_Id" th:value="${session.UserID}" />
+										                                
+										                                <div class="form-group"><label class="col-sm-2 control-label">GraphX的版本：</label>
+										                                    <div class="col-sm-10">
+										                                    	<input id="title" name="graphX_version" type="text" th:value="${graphX.graphX_version}" class="form-control"/>
+										                                    </div>
+										                                </div>
+										                                
+										                                <div class="form-group"><label class="col-sm-2 control-label">GraphX的算法：</label>
+										                                    <div class="col-sm-10">
+										                                    	<input id="title" name="graphX_algorithm" type="text" th:value="${graphX.graphX_algorithm}" class="form-control"/>
+										                                    </div>
+										                                </div>
+										                                
+										                                <div class="form-group"><label class="col-sm-2 control-label">GraphX的操作：</label>
+										                                    <div class="col-sm-10">
+										                                    	<input id="title" name="graphX_operation" type="text" th:value="${graphX.graphX_operation}" class="form-control"/>
+										                                    </div>
+										                                </div>
+										                                
+										
+										                                <div class="hr-line-dashed"></div>
+										                                <div class="form-group">
+										                                    <div class="col-sm-1 col-sm-offset-2">
+										                                        <input id="submitButton" class="btn btn-primary" type="submit" value="提   交"/>
+										                                    </div>
+										                                    <div>
+										                                    	<a class="btn btn-primary" th:href="@{/GraphXList}">返   回</a>
+										                                    </div>
+										                                </div>
+																	</form>
+
+                                                                </div>
+                                                                    
+                                                                <div id="data_source_2" style="display: none;" class="panel-body">
+
+                                                                </div>
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+                     </div>
+                     
+                     
+                </div>
+            </section>
+        </section>
+
+	</section>
+       
+    <!-- 加载中 -->
+	<div class="modal fade" id="showloding" style="overflow:hidden">  
+	  <div class="modal-dialog1 modal-sm"> 
+	  <div><img src="image/loding.gif"><label>加载中，请稍侯。。。</label></div> 
+	  </div><!-- /.modal-dialog -->  
+	</div><!-- /.modal -->
+	
+    
+    <script src="assets/js/vendor/jquery-1.11.1.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/navgoco/jquery.navgoco.min.js"></script>
+    <script src="assets/plugins/pace/pace.min.js"></script>
+    <script src="assets/plugins/fullscreen/jquery.fullscreen-min.js"></script>
+    <script src="assets/js/src/app.js"></script>
+    
+     <!--  -->
+    <script type="text/javascript" src="laydate/laydate.js"></script>
+	<script type="text/javascript" src="javascripts/d3.js"></script>
+	<script type="text/javascript" src="javascripts/wy.js"></script>
+	<script type="text/javascript" src="javascripts/dx.js"></script>
+	<script type="text/javascript" src="javascripts/srf.js"></script>
+	<script type="text/javascript" src="javascripts/util.js"></script>
+	<script type="text/javascript" src="javascripts/savePNG.js"></script>
+	
+	<!-- <script src="assets/plugins/dataTables/js/jquery.dataTables.js"></script>
+    <script src="assets/plugins/dataTables/js/dataTables.bootstrap.js"></script> -->
+	
+	<script type="text/javascript" src="table/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="table/js/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" src="table/js/dataTables.buttons.js"></script>
+	<script type="text/javascript" src="table/js/buttons.bootstrap.js"></script>
+	<script type="text/javascript" src="table/js/jszip.js"></script>
+	<script type="text/javascript" src="table/js/buttons.html5.js"></script> 
+    
+    
+    <!--Page Level JS-->
+    <script src="assets/plugins/countTo/jquery.countTo.js"></script>
+    <script src="assets/plugins/weather/js/skycons.js"></script>
+    <script src="assets/plugins/daterangepicker/moment.min.js"></script>
+    <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+
+    <!-- Morris  -->
+    <script src="assets/plugins/morris/js/morris.min.js"></script>
+    <script src="assets/plugins/morris/js/raphael.2.1.0.min.js"></script>
+    
+    <!-- Switch -->
+    <script src="assets/plugins/switchery/switchery.min.js"></script>
+    <!--Load these page level functions-->
+    <script>
+
+    $(function () { 
+        $("[data-toggle='tooltip']").tooltip(); 
+        $(".dropdown-menu>li:not(#showtable)").on('click', function (e) {
+                e.stopPropagation();
+        }); 
+
+        $("#clear_input").on('click', function () {
+        	$("#all_input").val("");
+    	});
+        $("#play").on('click', function () {
+        	searchByOption();
+        	var options = $("#searchKind option:selected");
+        	if(options.val()=="cypher"){
+        		var input = $("#all_input").val();
+        		if(input)
+        			$("#show_cypher").html('$ <a href="javacript:void(0)">'+input+'</a>');
+        	}else{
+        		$("#show_cypher").html("");
+        	}
+        	
+        	var history = $("#all_input").val();
+        	if(history){
+        		
+       			if($("#my_history").children().length>5){
+       				$("#my_history").children().first().remove();
+       			}
+       			var insert_history = '<li><a href="javacript:void(0)"> <i class="fa fa-history default-color"></i>'+history+'</a></li>';
+        		$("#my_history").append(insert_history);
+        	}
+    	});
+		$("#favorite").on('click', function () {
+			var options = $("#searchKind option:selected");
+        	if(options.val()=="cypher"){
+        		var input = $("#all_input").val();
+        		if(input){
+        			if($("#my_save").children().length>5){
+        				$("#my_save").children().first().remove();
+        			}
+        			var save = '<li><a href="#"> <i class="fa fa-bookmark info-color"></i>'+input+'</a></li>';
+        			$("#my_save").append(save);
+        		}
+        		
+        	}
+    	});
+		
+		$("#show_cypher").on('click',function(){
+			$("#all_input").val(($(this).children("a").text()));
+		})
+		
+		$("#my_history,#my_save").on('click','li a',function(){
+			$("#all_input").val(($(this).text()));
+		})
+		
+		$("#show_details").on('click',function(){
+				$("#show_details i").toggleClass("fa-angle-double-down fa-angle-double-up");
+		})
+		
+		$(".alert-danger .close").on('click',function(){
+			$("#show_errors").parents(".row").hide();
+		})
+		
+		$("#center_part .panel-body .tab-content").css("height",($(window).height()-230)+"px");
+		
+		$(window).resize(function() {
+			var height = $(window).height()-230;
+			$("#center_part .panel-body .tab-content").css("height",height+"px");
+		});
+		
+		if($("#show_errors").parents(".row").css("display")=="none"){
+		}else{
+		}
+		
+		$("#all_results").click(function(){
+		   var d = {links:all_links,nodes:all_nodes};
+		   update(d);
+		   showInfo();
+		   
+		   showTableView(allColumnName,allRowsData);//传列名和每行的数据
+		})
+		
+		$("#searchKind").change(function(){
+			var cur_select = $("#searchKind option:selected").val();
+			if(cur_select=="all"){
+				var prop_list = [];
+				var temp=null;
+				
+				jQuery.ajax({
+					type: 'POST',
+					url: 'getDB_details.do',
+					async: false,
+					dataType: 'json',
+					success: function(data){
+						temp=data.propertys;
+					},
+					error: function(){
+						console.log("获取节点、关系、属性信息失败");
+					}
+				});
+				
+				var insertOption = "<option selected disabled>--请选择属性值--</option>"
+				
+				for(var i in temp){
+					var t = temp[i];
+					insertOption += '<option value="'+t.prop+'">'+t.prop+'<option>';
+				}
+				
+				
+				$("#select_prop").show();
+				$("#all_input").css("width","80%");
+				
+				
+				$("#select_prop").html(insertOption);
+				
+				$("#select_prop").children("option").each(function(){
+					
+					if(this.text==""){
+						this.remove();
+					}
+				})
+				
+			}else{
+				$("#select_prop").hide();
+				$("#all_input").css("width","90%");
+				
+			}
+			
+			
+		})
+		
+		function toggleSidebar(side) {
+			if (side !== "left" && side !== "right") {
+				return false;
+			}
+			var left = $("#left_part"),
+				right = $("#right_part"),
+				content = $("#center_part"),
+				openSidebarsCount = 0,
+				contentClass = "";
+			
+			if (side === "left") {
+				left.toggleClass("col-md-0");
+			} else if (side === "right") {
+				right.toggleClass("col-md-0");
+			}
+			
+			if (!left.hasClass("col-md-0")) {
+				openSidebarsCount += 1;
+			}
+			
+			if (!right.hasClass("col-md-0")) {
+				openSidebarsCount += 1;
+			}
+			
+			if (openSidebarsCount === 0) {
+				contentClass = "col-md-12 col-lg-12";
+			} else if (openSidebarsCount === 1) {
+				contentClass = "col-md-10 col-lg-10";
+			} else {
+				contentClass = "col-md-8 col-lg-8";
+			}
+			
+			content.removeClass("col-md-8 col-md-10 col-md-12 col-lg-8 col-lg-10 col-lg-12")
+				   .addClass(contentClass);
+		} 
+        
+        $(".actions .fa-list-ol,#right_part .fa-times-circle").on('click',function(){
+        	toggleSidebar("right");
+        })
+        $(".actions .fa-code-fork,#left_part .fa-times-circle,#show_save").on('click',function(){
+            toggleSidebar("left");
+        })
+        
+
+    });
+
+    	</script>
+	</body>
+
+</html>

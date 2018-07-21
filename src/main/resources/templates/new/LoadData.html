@@ -1,0 +1,2002 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>GraphHub</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Fonts  -->
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/simple-line-icons.css">
+    <!-- CSS Animate -->
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <!--Page Level CSS-->
+    <link rel="stylesheet" href="assets/plugins/icheck/css/all.css">
+    <!-- Switchery -->
+    <link rel="stylesheet" href="assets/plugins/switchery/switchery.min.css">
+    <!-- Custom styles for this theme -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Feature detection -->
+    <script src="assets/js/vendor/modernizr-2.6.2.min.js"></script>
+
+    <style type="text/css">
+        .col-md-0{
+            display: none;
+        }
+        .node { stroke: #222; stroke-width: 1.5px; }
+        .node.B { fill: #ff0000; }
+        .node.C { fill: #37ff00; }
+        .node.P { fill: #ff68fb; }
+        .node.Per { fill: #fff50d; }
+        .node.Com { fill: #fff50d; }
+        .node.Com.xiaodai { fill: #d94600; }
+        .node.Com.dichan { fill: #8600ff; }
+        .link { stroke: #999; stroke-opacity: .6; /*stroke-width: 1; IE 浏览器爆炸*/fill:none;}
+        .link.DB{stroke:#8B0000;}
+        .link.JY{stroke:#757575;}
+        .link.DK{stroke:#1F7CF3;}
+        .link.DY{stroke:#EEAD0E;}
+        .link.ZDB{stroke:#20B2AA;}
+        .link.GL{stroke:#7D26CD;}
+        .text{fill:black;font-size:8px;"text-anchor":"middle";}
+        .arc{fill:#d2d5da;}
+        .link.shadow:hover{opacity:1;stroke:#87D489;}
+        .main-content-wrapper #main-content {
+            padding: 0 15px 0 15px;
+            width: 100%;
+        }
+        .myform{
+            width: 100%;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 0;
+            padding-bottom: 5px;
+        }
+        .col-md-2,.col-md-8,.col-md-10,.col-md-12{
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        #center_part .panel-body .tab-wrapper{
+            margin-bottom:0;
+        }
+        #center_part .panel-body .tab-content{
+            height:800px;
+        }
+        .isClicked{
+            background: #717172;
+        }
+        .modal-dialog1 {  margin: 20% 50%;  } 
+        .table tbody tr td{
+            /* table-layout:fixed; *//*表格宽度固定*/
+            word-wrap: break-word;/*换行*/
+            word-break:break-all;/*换行*/
+            text-align:center;/*文字水平居中*/
+            vertical-align: middle;/*垂直居中*/
+        }
+        .form-control{
+            border: 2px solid black;
+        }
+    </style>
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/vendor/html5shiv.js"></script>
+    <script src="assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <section id="main-wrapper" class="theme-green-full">
+        <header id="header">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="toggle-navigation toggle-left">
+                    <button class="sidebar-toggle" id="toggle-left">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </li>
+                
+            </ul>
+            <!--logo start-->
+            <div class="brand col-md-6 col-md-offset-5">
+                <a href="new_index.html" class="logo" style="text-transform:capitalize;">
+                    <i class="icon-layers"></i>
+                    Graphub</a>
+            </div>
+            <!--logo end-->
+           
+            <ul class="nav navbar-nav navbar-right">
+                <li class="toggle-profile hidden-xs">
+                    <button type="button" class="btn btn-default" id="toggle-profile">
+                        <i class="icon-user"></i>
+                    </button>
+                </li>
+                
+                 <li class="toggle-fullscreen hidden-xs">
+                    <button type="button" class="btn btn-default expand" id="toggle-fullscreen">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                </li>
+                
+            </ul>
+        </header>
+        <!--sidebar left start-->
+        <aside class="sidebar sidebar-left">
+          
+            <nav style="margin-top: 10px;">
+              
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a href="new_index.html" title="HomePage">
+                            <i class="fa  fa-fw fa-tachometer"></i> 主页
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="LoadData.html" title="ETL">
+                            <i class="fa  fa-fw fa-cogs"></i> 数据导入
+                        </a>
+                    </li>
+                    <li class="nav-dropdown">
+                        <a href="GraphBrowse.html" title="GraphBrowse">
+                            <i class="fa  fa-fw fa-th-list"></i> 图谱浏览
+                        </a>
+                    </li>
+                    <li class="nav-dropdown">
+                        <a href="#" title="AnalyticModel">
+                            <i class="fa fa-fw fa-bar-chart-o"></i> 分析模型
+                        </a>
+                        <ul class="nav-sub">
+                            <li>
+                                <a href="QueryModel.html" title="QueryModel">查询模型</a>
+                            </li>
+                            <li>
+                                <a href="TraversalModel.html" title="TraversalModel">遍历模型</a>
+                            </li>
+                            <li>
+                                <a href="StatisticsModel.html" title="StatisticsModel">统计模型</a>
+                            </li>
+                            <li>
+                                <a href="LearnModel.html" title="LearnModel">学习模型</a>
+                            </li>
+                            <li>
+                                <a href="MiningModel.html" title="MiningModel">挖掘模型</a>
+                            </li>
+                        </ul>
+                    </li> 
+                        <li class="nav-dropdown">
+                        <a href="GraphHubManager" title="GraphEdit">
+                            <i class="fa  fa-fw fa-edit"></i> 平台管理
+                        </a>
+                        <ul class="nav-sub">
+                            <li>
+                                <a href="#" title="Schema Edit">
+                                    模式修改
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="Graph Edit">
+                                     图谱修改
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!--sidebar left end-->
+        <!--main content start-->
+        <section class="main-content-wrapper">
+
+            <section id="main-content" class="animated fadeInUp">
+                <div class="row">
+                    <div id="left_part" class="col-md-2 col-sm-12 col-xs-12 col-lg-2 animated fadeInUp" >
+                         <aside class="panel">
+                               <div class="panel-heading">
+                                <!-- <h3 class="panel-title">保存</h3> -->
+                                <div class="actions pull-right">
+                                    <i class="fa fa-times-circle"></i>
+                                </div>
+                            </div>
+                             <aside class="panel-body">
+                                <button class="btn btn-info btn-block">导入流程</button>
+                                <ul id="my_save" class="nav nav-pills nav-stacked compose-nav" style="height:700px;overflow-y:auto">
+                                    <!--        <a href="#"> <i class="fa fa-bookmark info-color"></i></a></li> -->
+                                </ul>
+                            </aside>
+                         </aside>
+                     
+                     </div> 
+                     <!--中央panel -->
+                     <div id="center_panel" class="col-md-10 col-sm-12 col-xs-12 col-lg-10 animated fadeInUp">
+
+                         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12 animated fadeInUp">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="panel panel-default">
+                                        
+                                        <div class="panel-heading">
+                                        <span data-toggle="tooltip" data-placement="right" id="show_save" title="导入流程收藏" style="display:inline;cursor: pointer"><i class="fa fa-star"></i></span>    
+                                            <h3 class="panel-title">数据导入</h3>
+                                            <div class="actions pull-right">
+                                                <i class="fa fa-expand"></i>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <section class="fuelux">
+                                                <div id="MyWizard" class="wizard">
+                                                    <ul class="steps">
+                                                        <li id="wizard_step1" data-target="#step1" class="active"><span class="badge badge-info">1</span>抽取<span class="chevron"></span>
+                                                        </li>
+                                                        <li id="wizard_step2" data-target="#step2"><span class="badge">2</span>转换<span class="chevron"></span>
+                                                        </li>
+                                                        <li data-target="#step3"><span class="badge">3</span>装载<span class="chevron"></span>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="actions">
+                                                        <button type="button" id = "wizard_prev"  class="btn btn-default btn-mini btn-prev"> <i class="fa fa-chevron-left"></i> 上一步</button>
+                                                        <button type="button" id = "wizard_next" class="btn btn-primary btn-mini btn-next" data-last="数据导入">下一步 <i class="fa fa-chevron-right"></i></button>
+                                                    </div>
+                                                </div>
+                                                <div class="step-content">
+                                                    <div class="step-pane active" id="step1">
+                                                        <form class="form-horizontal">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-3 control-label">数据源类型</label>
+                                                                <div class="form-group col-sm-3">
+                                                                <select id = "datasource_type" class="form-control input-lg">
+                                                                    <option value="txt">文本文件</option>
+                                                                    <option value="database">数据库</option>
+                                                                    
+                                                                </select>
+                                                                </div>
+                                                            </div>
+                                                            <div  class="panel panel-default">
+
+                                                                <div id="data_source_1" class="panel-body">
+                                                                    <table class="table table-bordered">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>连接名</th>
+                                                                                <th>地址</th>
+                                                                                <th>端口</th>
+                                                                                <th>数据库类型</th>
+                                                                                <th>数据库名</th>
+                                                                                <th>用户名</th>
+                                                                                <th>密码</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td class=" col-sm-2">
+                                                                                    <input id = "connection_name" type="text" class="form-control">
+                                                                                </td> 
+                                                                                <td class=" col-sm-2">
+                                                                                    <input id="address" type="text" class="form-control">
+                                                                                </td>                                                                
+                                                                                <td class=" col-sm-1">
+                                                                                    <input id="port" type="text" class="form-control">
+                                                                                </td>
+                                                                                <td class=" col-sm-2">
+                                                                                    <select  id ="database_type" class="form-control">
+                                                                                        <option value="">MySQL</option>
+                                                                                        <option value="">SQL Server</option>
+                                                                                        <option value="">Oracle</option>
+                                                                                        <option value="">Access</option>
+                                                                                        <option value="">DB2</option>
+                                                                                    </select>
+                                                                                </td>
+                                                                                <td class=" col-sm-2">
+                                                                                    <input id = "database_name" type="text" class="form-control">
+                                                                                </td>
+                                                                                <td class=" col-sm-2">
+
+                                                                                    <input id = "user_name" type="text" class="form-control">
+                                                                                </td>
+                                                                                    
+                                                                                <td class=" col-sm-1">
+                                                                                    <input id="password" type="password" class="form-control">
+                                                                                </td> 
+
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                    <div class="form-horizontal" >
+                                                                        <button class="btn btn-primary">保存该连接</button>
+                                                                    </div>
+
+                                                                </div>
+                                                                    
+                                                                <div id="data_source_2" class="panel-body">
+                                                                    
+                                                                    <div class="col-sm-6">
+                                                                        <label class="radio-inline">
+                                                                        <input type="radio" value="0"  name="local_remote">远程文件</label>
+                                                                        <label class="radio-inline">
+                                                                        <input type="radio" value="1"  name="local_remote">本地文件</label>
+                                                                    </div>
+                                                                    <table class="table table-bordered">
+                                                                        <thead>
+                                                                            <tr id="txt_table_tr">
+                                                                                <th>路径</th>
+                                                                                <th>编码</th>
+                                                                                <th>分隔符</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td id="txt_table_td_1" class=" col-sm-2">
+                                                                                    <input id = "path" class="form-control" type="text">
+                                                                                </td> 
+
+                                                                                <td class=" col-sm-2">
+                                                                                    
+                                                                                    <select  id ="encoding" class="form-control">
+                                                                                        <option value="">UTF-8</option>
+                                                                                        <option value="">GBK</option>
+                                                                                        <option value="">ASCII</option>
+                                                                                        <option value="">ANSI</option>
+                                                                                    </select>
+                                                                                    
+                                                                                </td>
+                                                                                    
+                                                                                <td class=" col-sm-2">
+                                                                                    <input id="separator" value="," type="text" class="form-control">
+                                                                                </td> 
+
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="step-pane" id="step2">
+                                                        <form class="form-horizontal">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-3 control-label">数据类型</label>
+                                                                <div class="form-group col-sm-3">
+                                                                <select id = "node_or_relation" class="form-control">
+                                                                    <option value="node">节点</option>
+                                                                    <option value="relation">关系</option>
+                                                                    
+                                                                </select>
+                                                                </div>
+                                                                <label id="label_label" class="col-sm-1 control-label"></label>
+                                                                <div id="label_select_div" class="form-group col-sm-3">   
+                                                                    <div id="label_select_div_1" class="form-group col-sm-12">
+                                                                    <input  class="form-control label_select" list ="label_datalist" />
+                                                                    <datalist id ="label_datalist" >
+                                                                    </datalist>
+                                                                    </div>
+                                                                    <div id="label_select_div_2" class="form-group col-sm-1">
+                                                                    <button id="add_label" type="button" class="btn btn-default">+</button>
+                                                                    </div>
+
+                                                                </div>   
+
+                                                            </div>
+                                                            <div  class="form-group">
+                                                                <div class="col-sm-2"><input id='col_name_has' class="icheck" type="checkbox">无表头</div>
+                                                            </div>
+
+
+                                                            <!-- 动态生成表格 纵向为数据表的字段 横向为对数据表的操作 -->
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    <div class="actions pull-right">
+                                                                        <i class="fa fa-expand"></i>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <table  style="table-layout:fixed;" class="table table-bordered">
+                                                                        <thead id="table_thead">
+                                                                            
+                                                                            <tr id="table_tr">
+                                                                                <th>选择</th>
+                                                                                <th>属性</th>
+                                                                                <th>数据类型</th>
+                                                                                <th colspan="4">数据预览</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody id="data_form_tbody">
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                </div>
+                                                            </div>
+
+                                                            <div  id="start_attr_group" class="form-group">
+                                                                <label class="control-label col-sm-2">起始标签</label>
+                                                                <div  class="form-group col-sm-10">
+
+                                                                    <div id="start_labels_group" class="form-group col-sm-8">
+                                                                        <!--   select
+                                                                        <div class="form-group col-sm-5">
+                                                                            <select class="form-control start_label_select"></select>
+                                                                        </div>
+                                                                        <label class="control-label col-sm-2">属性</label>
+                                                                        <div class="form-group col-sm-5">
+                                                                            <select class="form-control start_attr_select"></select>
+                                                                        </div>-->
+                                                                        
+                                                                        <div class="form-group col-sm-5">
+                                                                            <input class="form-control start_label_select" list="label_datalist">
+                                                                            <datalist id="label_datalist"></datalist>
+                                                                        </div>
+                                                                        <label class="control-label col-sm-2">属性</label>
+                                                                        <div class="form-group col-sm-5">
+                                                                            <input class="form-control start_attr_select" list="attr_datalist">
+                                                                            <datalist id="attr_datalist"></datalist>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div id="start_label_add_div" class="form-group col-sm-1">
+                                                                            <button id="add_start_label" type="button" class="btn btn-primary">+</button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div  id="end_attr_group" class="form-group">
+                                                                <label class="control-label col-sm-2">结束标签</label>
+                                                                <div  class="form-group col-sm-10">
+
+                                                                    <div id="end_labels_group" class="form-group col-sm-8">
+                                                                        <!-- 
+                                                                        <div class="form-group col-sm-5">
+                                                                            <select class="form-control end_label_select"></select>
+                                                                        </div>
+                                                                        <label class="control-label col-sm-2">属性</label>
+                                                                        <div class="form-group col-sm-5">
+                                                                            <select class="form-control end_attr_select"></select>
+                                                                        </div>
+                                                                        -->
+                                                                        <div class="form-group col-sm-5">
+                                                                            <input class="form-control end_label_select" list="label_datalist">
+                                                                            <datalist id="label_datalist"></datalist>
+                                                                        </div>
+                                                                        <label class="control-label col-sm-2">属性</label>
+                                                                        <div class="form-group col-sm-5">
+                                                                            <input class="form-control end_attr_select" list="attr_datalist">
+                                                                            <datalist id="attr_datalist"></datalist>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="end_label_add_div" class="form-group col-sm-1">
+                                                                            <button id="add_end_label" type="button" class="btn btn-primary">+</button>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            
+
+                                                            <div  id="index_up_group" class="form-group">
+                                                                <label class="control-label col-sm-2">索引</label>
+                                                                <div id="index_group" class="form-group col-sm-6">
+                                                                    <div class="index_group_1">
+                                                                        <div class="form-group col-sm-6">
+                                                                            <input  placeholder="标签" class="form-control index_1" list ="label_datalist" />
+                                                                            <datalist id ="label_datalist" >
+                                                                            </datalist>
+                                                                        </div>
+
+                                                                        <div class="form-group col-sm-6">
+                                                                            <input  placeholder="属性" class="form-control index_2" list ="filter_1_datalist" />
+                                                                            <datalist id ="filter_1_datalist" >
+                                                                            </datalist>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+    
+                                                                <div id="index_add_div" class="form-group col-sm-1">
+                                                                    <button id="add_index" type="button" class="btn btn-primary">+</button>
+                                                                </div>
+
+
+                                                            </div>
+
+                                                            <div id="constraint_up_group" class="form-group">
+                                                                <label class="control-label col-sm-2">约束</label>
+                                                                <div id="constraint_group" class="form-group col-sm-6">
+                                                                    <div class="constraint_group_1">
+                                                                        <div class="form-group col-sm-6">
+                                                                            <input  placeholder="标签" class="form-control constraint_1" list ="label_datalist" />
+                                                                            <datalist id ="label_datalist" >
+                                                                            </datalist>
+                                                                        </div>
+
+                                                                        <div class="form-group col-sm-6">
+                                                                            <input  placeholder="属性" class="form-control constraint_2" list ="filter_1_datalist" />
+                                                                            <datalist id ="filter_1_datalist" >
+                                                                            </datalist>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+    
+                                                                <div id="constraint_add_div" class="form-group col-sm-1">
+                                                                    <button id="add_constraint" type="button" class="btn btn-primary">+</button>
+                                                                </div>
+
+
+                                                            </div>
+
+
+
+                                                            <div  class="form-group">
+                                                                <label class="control-label col-sm-2">筛选规则</label>
+                                                                <div id="filter_group" class="form-group col-sm-6">
+                                                                    <div class="filter_group_1">
+                                                                        <div class="form-group col-sm-4">
+                                                                            <input  class="form-control filter_1" list ="filter_1_datalist" />
+                                                                            <datalist id ="filter_1_datalist" >
+                                                                            </datalist>
+                                                                        </div>
+                                                                        <div class="form-group col-sm-4">
+                                                                            <select class="form-control filter_2">
+                                                                                <option value="">=</option>
+                                                                                <option value="">></option>
+                                                                                <option value=""><</option>
+                                                                                <option value="">=<</option>
+                                                                                <option value="">>=</option>
+                                                                                <option value="">!=</option>
+                                                                                <option value="">包含</option>
+                                                                                <option value="">不包含</option>
+                                                                            </select>
+                                                                        </div>
+                                                                        <div class="form-group col-sm-4">
+                                                                            <input class="form-control filter_3" type="text" name="">
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+    
+                                                                <div id="filter_add_div" class="form-group col-sm-1">
+                                                                    <button id="add_filter" type="button" class="btn btn-primary">+</button>
+                                                                </div>
+
+
+                                                            </div>
+
+
+
+
+                    
+                                                        </form>
+                                                    </div>
+
+                                                    <div class="step-pane" id="step3">
+                                                        <form class="form-horizontal">
+
+                                                            <!-- 动态生成表格 纵向为数据表的字段 横向为对数据表的操作 -->
+                                                            <div class="panel panel-default">
+                                                                <div class="panel-heading">
+                                                                    <div class="actions pull-right">
+                                                                        <i class="fa fa-expand"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="panel-body">
+                                                                    <div class="col-sm-6">
+                                                                        <div class="panel panel-success">
+                                                                            <div class="panel-heading">
+                                                                                <h3 class="panel-title">导入模式</h3>
+                                                                                <div class="actions pull-right">
+                                                                                    <i class="fa fa-expand"></i>
+                                                                                    <i class="fa fa-chevron-down"></i>
+                                                                                    <i class="fa fa-times"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="panel-body">
+                                                                                <div class="form-group">
+                                                                                    <label class="col-sm-3 control-label">导入模式</label>
+                                                                                    <div class="col-sm-6">
+                                                                                        <label class="radio-inline">
+                                                                                            <input class="icheck rad1" type="radio" value="1" name="rad1">事务模式</label>
+                                                                                        <label class="radio-inline">
+                                                                                            <input class="icheck rad2" type="radio" value="0" name="rad1">非事务模式</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label class="col-sm-3 control-label">更新类型</label>
+                                                                                    <div class="col-sm-6">
+                                                                                        <label class="radio-inline">
+                                                                                            <input class="icheck" type="radio" value="add" name="rad2">增量更新</label>
+                                                                                        <label  class="radio-inline">
+                                                                                            <input  id ="update_all" class="icheck" type="radio" value="all" name="rad2">全量更新</label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="panel panel-info">
+                                                                            <div class="panel-heading">
+                                                                                <h3 class="panel-title">导入结果</h3>
+                                                                                <div class="actions pull-right">
+                                                                                    <i class="fa fa-expand"></i>
+                                                                                    <i class="fa fa-chevron-down"></i>
+                                                                                    <i class="fa fa-times"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="panel-body">
+                                                                                <div class="panel-body">
+                                                                                    <h4 id="import_result" class="panel-title"></h4>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="panel panel-info">
+                                                                            <div class="panel-heading">
+                                                                                <h3 class="panel-title">数据流</h3>
+                                                                                <div class="actions pull-right">
+                                                                                    <i class="fa fa-expand"></i>
+                                                                                    <i class="fa fa-chevron-down"></i>
+                                                                                    <i class="fa fa-times"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="panel-body">
+                                                                                <div class="panel-body">
+                                                                                    <h4 class="panel-title">From:</h4>
+                                                                                    <div>
+                                                                                        <div class="col-sm-3">Name:</div>
+                                                                                        <div id="DataSource_name" class="col-sm-8">Name</div>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <div class="col-sm-3">Type:</div>
+                                                                                        <div id="DataSource_type" class="col-sm-8">DataSource Type</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="panel-body">
+                                                                                    <h4 class="panel-title">To:</h4>
+                                                                                    <div>
+                                                                                        <div class="col-sm-3">Address:</div>
+                                                                                        <div id="DataTarget_Address" class="col-sm-8">Address</div>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <div class="col-sm-3">Name:</div>
+                                                                                        <div id="DataTarget_name" class="col-sm-8">Instance Name</div>
+                                                                                    </div>
+                                                                                    <div>
+                                                                                        <div class="col-sm-3">Type:</div>
+                                                                                        <div id="DataTarget_type" class="col-sm-8">DataTarget Type</div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="panel-body">
+
+                                                                    <div  class="form-group  form-horizontal">
+                                                                        <div class="col-sm-2" >
+                                                                            <input type="text" placeholder="映射名称" class="form-control col-sm-2" name="">
+                                                                        </div>
+                                                                        <button class="btn btn-primary col-sm-1">保存映射</button>
+                                                                    </div>  
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         </div>
+                     </div>
+    
+                </div>
+            </section>
+        </section>
+        <!--main content end-->
+    </section>
+    
+    <!-- 加载中 -->
+    <div class="modal fade" id="showloding" style="overflow:hidden">  
+      <div class="modal-dialog1 modal-sm"> 
+      <div><img src="image/loding.gif"><label>加载中，请稍侯。。。</label></div> 
+      </div><!-- /.modal-dialog -->  
+    </div><!-- /.modal -->
+    
+
+ 
+    <!--Global JS-->
+    <script src="assets/js/vendor/jquery-1.11.1.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/navgoco/jquery.navgoco.min.js"></script>
+    <script src="assets/plugins/pace/pace.min.js"></script>
+    <script src="assets/plugins/fullscreen/jquery.fullscreen-min.js"></script>
+    <script src="assets/js/src/app.js"></script>
+    
+     <!--  -->
+    <script type="text/javascript" src="laydate/laydate.js"></script>
+    <script type="text/javascript" src="javascripts/d3.js"></script>
+    <script type="text/javascript" src="javascripts/wy.js"></script>
+
+    <script type="text/javascript" src="javascripts/dx.js"></script>
+    <script type="text/javascript" src="javascripts/srf.js"></script>
+    <script type="text/javascript" src="javascripts/util.js"></script>
+    <script type="text/javascript" src="javascripts/savePNG.js"></script>
+    
+    <script type="text/javascript" src="table/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="table/js/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="table/js/dataTables.buttons.js"></script>
+    <script type="text/javascript" src="table/js/buttons.bootstrap.js"></script>
+    <script type="text/javascript" src="table/js/jszip.js"></script>
+    <script type="text/javascript" src="table/js/buttons.html5.js"></script>
+    
+    
+    <!--Page Level JS-->
+    <script src="assets/plugins/countTo/jquery.countTo.js"></script>
+    <script src="assets/plugins/weather/js/skycons.js"></script>
+    <script src="assets/plugins/daterangepicker/moment.min.js"></script>
+    <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+
+    <!-- Morris  -->
+    <script src="assets/plugins/morris/js/morris.min.js"></script>
+    <script src="assets/plugins/morris/js/raphael.2.1.0.min.js"></script>
+    
+    <!-- Switch -->
+    <script src="assets/plugins/switchery/switchery.min.js"></script>
+    <!--Load these page level functions-->
+    <script>
+
+    $(function () { 
+        $("[data-toggle='tooltip']").tooltip(); 
+        $(".dropdown-menu>li:not(#showtable)").on('click', function (e) {
+                e.stopPropagation();
+        }); 
+
+        $("#clear_input").on('click', function () {
+            $("#all_input").val("");
+        });
+        $("#play").on('click', function () {
+            searchByOption();
+            var options = $("#searchKind option:selected");
+            if(options.val()=="cypher"){
+                var input = $("#all_input").val();
+                if(input)
+                    $("#show_cypher").html("$ "+input);
+            }else{
+                $("#show_cypher").html("");
+            }
+            
+            var history = $("#all_input").val();
+            if(history){
+                
+                if($("#my_history").children().length>5){
+                    $("#my_history").children().first().remove();
+                }
+                var insert_history = '<li><a href="#"> <i class="fa fa-history default-color"></i>'+history+'</a></li>';
+                $("#my_history").append(insert_history);
+            }
+        });
+        $("#favorite").on('click', function () {
+            var options = $("#searchKind option:selected");
+            if(options.val()=="cypher"){
+                var input = $("#all_input").val();
+                if(input){
+                    if($("#my_save").children().length>5){
+                        $("#my_save").children().first().remove();
+                    }
+                    var save = '<li><a href="#"> <i class="fa fa-bookmark info-color"></i>'+input+'</a></li>';
+                    $("#my_save").append(save);
+                }
+                
+            }
+        });
+        
+        $("#show_details").on('click',function(){
+                $("#show_details i").toggleClass("fa-angle-double-down fa-angle-double-up");
+        })
+        
+        
+        function toggleSidebar(side) {
+            if (side !== "left" && side !== "right") {
+                return false;
+            }
+            var left = $("#left_part"),
+
+                content = $("#center_panel"),
+                openSidebarsCount = 0,
+                contentClass = "";
+            
+            if (side === "left") {
+                left.toggleClass("col-md-0");
+            } 
+            
+            if (!left.hasClass("col-md-0")) {
+                openSidebarsCount += 1;
+            }
+            
+            
+            if (openSidebarsCount === 0) {
+                contentClass = "col-md-12 col-lg-12";
+            } else if (openSidebarsCount === 1) {
+                contentClass = "col-md-10 col-lg-10";
+            } 
+            
+            content.removeClass("col-md-8 col-md-10 col-md-12 col-lg-8 col-lg-10 col-lg-12")
+                   .addClass(contentClass);
+        } 
+        
+
+        $(".actions .fa-code-fork,#left_part .fa-times-circle,#show_save").on('click',function(){
+            toggleSidebar("left");
+            
+        })
+        
+
+    });
+
+    </script>
+
+
+    <!--初始目标数据库获取设置 数据源信息定义-->
+    <script type="text/javascript">
+        var DataTarget_String = '{"IP":"127.0.0.1","port":":5678","type":"Neo4j","Database_name":"Neo4j_database"}';
+        var DataTarget_json = JSON.parse(DataTarget_String);
+        //alert(DataTarget_json.IP);
+        var DataSource_type;
+        var DataSource_name;
+        var DataSource_path;
+        var DataSource_ip;
+        var DataSource_port;
+
+    </script>
+
+    <!-- 获取图数据库中已有的label  并放置在相应位置 label_datalist-->
+    <script type="text/javascript">
+        //自定义label数组
+        var label_array = new Array("person","bank","account","company");
+        var label_datalist_add = "";
+        //alert(label_array);
+        for(var i=0;i<label_array.length;i++){
+            //alert(i);
+            //alert(label_array[i])
+            label_datalist_add = label_datalist_add + '<option>'+label_array[i]+'</option>';
+        }
+        $("#label_datalist").html(label_datalist_add);
+
+        //获取filter_1_datalist
+        //4.Col_name    自定义列名   Col1:列1;col2:列2
+
+        //label_select
+        var label_select = '<select class="form-control">';
+        for(var prop in label_array){
+            label_select = label_select+'<option>'+label_array[prop]+'</option>';
+        }
+        label_select = label_select+'</select>';
+
+
+
+    </script>
+
+    <!-- 根据datasource_type的改变实现数据源表单的改变-->
+    <script type="text/javascript">
+            var datasource_type_value = $("#datasource_type").val();
+            //alert(datasource_type_value);
+            if (datasource_type_value=="txt") {
+                $("#data_source_1").hide();
+                $("#data_source_2").show();
+            }else{
+                $("#data_source_1").show();
+                $("#data_source_2").hide();
+            }
+        $("#datasource_type").change(function(){
+            var datasource_type_value = $("#datasource_type").val();
+            //alert(datasource_type_value);
+            if (datasource_type_value=="txt") {
+                $("#data_source_1").hide();
+                $("#data_source_2").show();
+            }else{
+                $("#data_source_1").show();
+                $("#data_source_2").hide();
+            }
+        });
+
+        $("input[name='local_remote']:eq(0)").prop("checked",true);
+        function data_source_2_show(local_remote){
+            if (local_remote=="0") {
+                //远程文件
+                $("#txt_table_tr").html('<th>路径</th><th>编码</th><th>分隔符</th>');
+                $("#txt_table_td_1").html('<input id = "path" class="form-control" type="text">');
+            }else if(local_remote=="1"){
+                //本地文件
+                $("#txt_table_tr").html('<th>上传</th><th>编码</th><th>分隔符</th>');
+                $("#txt_table_td_1").html('<input id = "txt_upload" type="file" name="">');
+            }
+        }
+
+        //获取当前local_remote选中项
+        var local_remote_val = $("input[name='local_remote']:checked").val();
+        //alert(local_remote_val);
+        data_source_2_show(local_remote_val);
+        $("input[name='local_remote']").change(function(){
+            var local_remote_val = $("input[name='local_remote']:checked").val();
+            data_source_2_show(local_remote_val);
+        });
+
+
+
+    </script>
+
+    <!-- 点击txt模式中的上传文件，可直接读取txt文件的路径-->
+    <script type="text/javascript">
+        $("#txt_upload").change(function(){
+            //alert($(this).val());
+            //浏览器兼容问题，不一定每一款浏览器都能读取路径信息，暂停开发
+        });
+    </script>
+
+
+
+
+    <!-- 数据预览-->
+    <script type="text/javascript">
+        function show_preview_data(node_or_relation,num_col,num_row,csv,has_col_name){
+            $("#data_form_tbody").empty();
+
+            if (has_col_name) {
+                for (var i = 0; i < num_col; i++) {
+                    var col_name = "col_"+i;
+                    var col_start_radio = i+"_start";
+                    var col_end_radio = i+"_end";
+                    var col_key_node = i+"_key";
+                    var col_name_id = col_name+"name";
+                    var col_name_define = col_name+"define";
+                    var col_choic = col_name+"choic";
+                    var col_type =col_name+"type";
+                    var col_data = "data"+col_name;
+                    var col_attr_index = col_name+"attr_index";
+                    var col_attr_restrain = col_name+"attr_restrain";
+                    var add_different = "";
+                    var add_different_1 = "";
+                    var col_add = "";
+                    if (node_or_relation=="node") {
+                        add_different_1 = '<td class=" col-sm-2"><input class="form-control" type = "radio" name="key_node" value="'+i+'"/></td>';
+                    }else{
+                        add_different_1 = '<td class=" col-sm-1"><input class="form-control" type = "radio" name="start_node" value="'+i+'"/></td><td class=" col-sm-1"><input class="form-control" type = "radio" name="end_node" value="'+i+'"/></td>';
+                    }
+                    add_different = '<td class=" col-sm-2"><input class="form-control col_name" type = "text" id="'+ col_name_id+'" value="'+i+'"/></td>';
+                    col_add = '<tr id="'+col_name+'"><td class=" col-sm-1"><div class="radio"><input id="'+col_choic+'" class="icheck" type="checkbox" value="'+i+'" name="check3"></div></td>'+add_different+add_different_1+'<td class=" col-sm-1"><select id="'+col_type+'" class="form-control col_type"><option value="">string</option><option value="">integer</option><option value="">float</option><option value="">boolean</option><option value="">double</option><option value="">long</option></select></td> </td>  <td class=" row0 col-sm-2" id ="'+col_data+"0"+'"></td><td class=" row1 col-sm-2" id ="'+col_data+"1"+'"></td><td class=" row2 col-sm-2" id ="'+col_data+"2"+'"></td><td class=" row3 col-sm-2" id ="'+col_data+"3"+'"></td>';
+                    $("#data_form_tbody").append(col_add);
+
+
+                    $(".row0").each(function(x,y){
+                        y.innerHTML = csv[x][0];
+                    });
+                    $(".row1").each(function(x,y){
+                        y.innerHTML = csv[x][1];
+                    });
+                    $(".row2").each(function(x,y){
+                        y.innerHTML = csv[x][2];
+                    });
+                    $(".row3").each(function(x,y){
+                        y.innerHTML = csv[x][3];
+                    });
+                }
+
+
+
+                
+            }else{
+                for (var i = 0; i < num_col; i++) {
+                    var col_name = "col_"+i;
+                    var col_start_radio = i+"_start";
+                    var col_end_radio = i+"_end";
+                    var col_key_node = i+"_key";
+                    var col_name_id = col_name+"name";
+                    var col_name_define = col_name+"define";
+                    var col_choic = col_name+"choic";
+                    var col_type =col_name+"type";
+                    var col_data = "data"+col_name;
+                    var col_attr_index = col_name+"attr_index";
+                    var col_attr_restrain = col_name+"attr_restrain";
+                    var add_different = "";
+                    var add_different_1 = "";
+                    var col_add = "";
+                    if (node_or_relation=="node") {
+                        add_different_1 = '<td class=" col-sm-2"><input class="form-control " type = "radio" name="key_node" value="'+i+'"/></td>';
+                    }else{
+                        add_different_1 = '<td class=" col-sm-1"><input class="form-control " type = "radio" name="start_node" value="'+i+'"/></td><td class=" col-sm-1"><input class="form-control " type = "radio" name="end_node" value="'+i+'"/></td>';
+                    }
+                    //console.log(i);
+                    //console.log(csv[i][0]+"     ");
+                    add_different = '<td class=" col-sm-2"><input class="form-control col_name" type = "text" id="'+ col_name_id+'" value = "'+csv[i][0]+'"/></td>';
+                    col_add = '<tr id="'+col_name+'"><td class=" col-sm-1"><div class="radio"><input id="'+col_choic+'" class="icheck" type="checkbox" value="'+i+'" name="check3"></div></td>'+add_different+add_different_1+'<td class=" col-sm-1"><select id="'+col_type+'" class="form-control col_type"><option value="">string</option><option value="">integer</option><option value="">float</option><option value="">boolean</option><option value="">double</option><option value="">long</option></select></td> </td>  <td class=" row0 col-sm-2" id ="'+col_data+"0"+'"></td><td class=" row1 col-sm-2" id ="'+col_data+"1"+'"></td><td class=" row2 col-sm-2" id ="'+col_data+"2"+'"></td><td class=" row3 col-sm-2" id ="'+col_data+"3"+'"></td>';
+
+
+                    $("#data_form_tbody").append(col_add);
+
+
+                    $(".row0").each(function(x,y){
+                        y.innerHTML = csv[x][1];
+                    });
+                    $(".row1").each(function(x,y){
+                        y.innerHTML = csv[x][2];
+                    });
+                    $(".row2").each(function(x,y){
+                        y.innerHTML = csv[x][3];
+                    });
+                    $(".row3").each(function(x,y){
+                        y.innerHTML = csv[x][4];
+                    });
+
+
+                    
+                }
+
+
+            }
+
+            var col_name_array = new Array();
+            $("#data_form_tbody .col_name").each(function(x){
+                col_name_array.push($(this).val());
+                            //alert(col_name_array);
+            });
+
+            //1.start-key-end
+            var option_add = "";
+            for(var prop in col_name_array){
+                option_add = option_add+'<option>'+col_name_array[prop]+'</option>';
+            }
+
+            if (node_or_relation=="node") {
+                $("#label_key").text("主键");
+                $("#key_group").show();
+                $("#start_end_group").hide();
+                $("#start_attr_group").hide();
+                $("#end_attr_group").hide();
+                $("#key_select").html(option_add);
+                $("#start_end_labels_div").hide();
+                $("#index_up_group").show();
+                $("#constraint_up_group").show();
+                $("#update_all").removeAttr('disabled');
+                $("#label_label").text("标签");
+                $("#table_tr").html('<th>选择</th><th>属性</th><th>主键</th><th>数据类型</th><th colspan="4">数据预览</th>');
+                $("input[name='key_node']:eq(0)").prop("checked",true);
+
+            }else{
+                $("#label_key").text("起始列和结束列"); 
+                $("#key_group").hide();
+                $("#start_end_group").show();
+                $("#start_attr_group").show();
+                $("#end_attr_group").show();
+                $("#start_select").html(option_add);
+                $("#end_select").html(option_add);
+                $("#start_end_labels_div").show();
+                $("#index_up_group").hide();
+                $("#constraint_up_group").hide();
+                $("label_select_div").html('<div id="label_select_div_1" class="form-group col-sm-12"><input  class="form-control label_select" list ="label_datalist" /><datalist id ="label_datalist" ></datalist></div>');
+
+                $("#update_all").attr('disabled',"true");
+                $("#label_label").text("关系类型");
+                $("#table_tr").html('<th>选择</th><th>属性</th><th>起始列</th><th>结束列</th><th>数据类型</th><th colspan="4">数据预览</th>');
+                $("input[name='start_node']:eq(0)").prop("checked",true);
+                $("input[name='end_node']:eq(1)").prop("checked",true);
+                //$("#start_labels_group").html(start_label_select_str);
+                //$("#end_labels_group").html(end_label_select_str);
+
+
+
+            }
+            $("input[name='rad1']:eq(0)").prop("checked",true);
+            $("input[name='rad2']:eq(0)").prop("checked",true);
+            $("input[name='check3']").each(function(){
+                $(this).prop("checked",true);
+            });
+            //alert(col_name_array);
+
+            //这个数组是根据起始和结束标签从后台请求来的
+            attr_array = new Array('姓名','手机','账户','地址','年龄');
+            var attr_select = '';
+            for(var prop in attr_array){
+                attr_select = attr_select+'<option>'+attr_array[prop]+'</option>';
+            }
+            $("#attr_datalist").html(attr_select);
+
+
+
+            start_label_select_str = '<div><div class="form-group col-sm-5"><input class="form-control start_label_select" placeholder="标签" list="label_datalist"> <datalist id="label_datalist"></datalist></div><div class="form-group col-sm-1"><button  type="button" class="btn btn-primary del_start_label_bt">-</button></div></div>';
+            end_label_select_str = '<div><div class="form-group col-sm-5"><input class="form-control end_label_select" placeholder="标签" list="label_datalist"><datalist id="label_datalist"></datalist></div><div class="form-group col-sm-1"><button  type="button" class="btn btn-primary del_end_label_bt">-</button></div></div>';
+
+
+
+
+
+        }
+
+    </script>
+    <!--事务模式下节点添加labels -->
+    <script type="text/javascript">
+        $(".start_end_labels").on('click',function(){
+
+        });
+    </script>
+
+    <!-- 流程栏Next按钮监控 第一个Next点击后发送基本数据库信息，对csv或者关系数据库的表头和数据进行预览-->
+    <script type="text/javascript">
+        //定义预览数据csv
+        var csv = new Array();
+        var num_col;
+        var num_row;
+        var col_name_array = new Array();
+        //定义数据库中节点标签和属性对象
+        var node_obj;
+        $("#wizard_next").on('click',function(){
+            if ($("#step1").attr("class")=="step-pane active") {
+                var datasource_type = $("#datasource_type").val();
+                if (datasource_type=="database") {
+                    var connection_name = $("#connection_name").val();
+                    var database_type = $("#database_type").find("option:selected").val();
+                    var address = $("#address").val();
+                    var port = $("#port").val();
+                    var database_name = $("#database_name").val();
+                    var user_name = $("#user_name").val();
+                    var password = $("#password").val();
+                    var send_first = '{"connection_name":"'+connection_name+'","database_type":"'+database_type+'","address":"'+address+'","port":"'+port+'","database_name":"'+database_name+'","user_name":"'+user_name+'","password":"'+password+'"}';
+                    
+                    
+                    //var name_data_json = JSON.parse(name_data);
+                    var send_first_json = JSON.parse(send_first);
+                    //alert(send_first);
+                    if (address==""||port==""||database_name==""||user_name==""||password=="") {
+                        alert("不能为空");
+                        document.getElementById('wizard_step1').click();            
+                    }else{
+                        //alert(send_first);
+                        var data_preview;
+                        jQuery.ajax({
+                            type: 'POST',
+                            url:"previewtxt.do",
+                            data : send_first_json,
+                            dataType: 'json',       
+                            success : function(result) {
+                                    //alert(result);
+                                    //console.log(result);
+                            }
+                        });
+                    }
+
+
+                }else if (datasource_type=="txt") {
+                    var path = $("#path").val();
+                    var encoding = $("#encoding").find("option:selected").text();
+                    var separator = $("#separator").val();
+                    var send_first='{"path":"'+path+'","encoding":"'+encoding+'","separator":"'+separator+'"}';
+                    var send_first_json = JSON.parse(send_first);
+                    if (path==""||separator=="") {
+                        alert("不能为空");
+                        document.getElementById('wizard_step1').click();             
+                    }else{
+                        //alert(send_first);
+
+                        jQuery.ajax({
+                            type: 'POST',
+                            url:"previewtxt.do",
+                            data : send_first_json,
+                            dataType: 'json',       
+                            success : function(result) {
+                                    //alert(result);
+                                    //console.log(result);
+                                    csv = new Array();
+                                    if(result.length>=4){
+                                        num_row=4;
+                                    }else{
+                                        num_row=result.length;
+                                    }
+                                    for(var i=0;i<result[0].length;i++){
+                                        csv[i] = new Array();
+                                    }
+                                    for(var i =0; i<result.length;i++){
+                                        for(var j = 0;j<result[0].length;j++){
+                                            csv[j][i] = result[i][j];
+                                        }
+                                    }
+                                    if (num_row<4) {
+                                        for(var a=num_row;a<5;a++){
+                                            for(var j = 0;j<result[0].length;j++){
+                                                csv[j][a] = "";
+                                            }
+                                        }
+                                    }
+                                    num_col = csv.length;
+
+                                    console.log(csv);
+
+                                    console.log("num_col:"+num_col+",num_row:"+num_row);
+                                    var data_type = $("#node_or_relation").val();
+                                    //数据初始化 假定为关系 有表头
+                                    show_preview_data(data_type,num_col,num_row,csv,false);
+                                    //提取列名到数组col_name_array
+
+                                    //筛选规则属性填充
+                                    var col_names = new Array();
+                                    $(".col_name").each(function(){
+                                        col_names.push($(this).val());
+                                    });
+
+                                    //属性datalist
+                                    var filter_1_datalist_add = "";
+                                    for(var i=0;i<col_names.length;i++){
+                                        //alert(i);
+                                        //alert(label_array[i])
+                                        filter_1_datalist_add = filter_1_datalist_add + '<option>'+i+'</option>';
+                                    }
+                                    //alert(filter_1_datalist_add);
+                                    $("#filter_1_datalist").html(filter_1_datalist_add);
+                                    //$("#start_attr_select").html(attr_select);
+                                    //$("#end_attr_select").html(attr_select);
+
+
+
+                                      
+                            }
+                        });
+
+                        jQuery.ajax({
+                            type: 'POST',
+                            url:"getAllNodeLabelAndProperty.do",
+                            //data : send_first_json,
+                            dataType: 'json',       
+                            success : function(result) {
+                                    //alert(result);
+                                    console.log(result);
+                                    node_obj = result;
+
+
+                                      
+                            }
+                        });
+                        //数据源信息定义
+                        DataSource_type = "CSV";
+                        DataSource_path = path;
+                        var arr=path.split('\\');
+                        arr.reverse();
+                        DataSource_name = arr[0];
+
+                    }
+                }
+
+
+
+               
+            }else if ($("#step2").attr("class")=="step-pane active") {
+                //submit_second();
+                var labels = get_labels();
+                //alert(labels);
+                var start_labels = get_start_labels();
+                var end_labels = get_end_labels();
+                var node_relation = $("#node_or_relation").val();
+                var x=true;
+                var y=true;
+                if(node_relation=="node"){
+                    for(prop in labels){
+                        if (labels[prop]=="") {
+                            x=false;
+                        }
+                        
+                    }
+                }else if(node_relation=="relation"){
+                    for(prop in start_labels){
+                        if (start_labels[prop]=="") {
+                            x=false;
+                        }
+                    }
+                    for(prop in end_labels){
+                        if (end_labels[prop]=="") {
+                            x=false;
+                        }
+                    }
+                    if(get_start_attr()==""||get_end_attr()==""){
+                        y=false;
+                    }
+
+                }
+
+
+                //alert(x);
+                //x==true labels数组中不含有空值
+                if (x==false) {
+                    //submit_second();
+                    alert("标签不可为空");
+                    document.getElementById('wizard_prev').click();
+                }
+                if(y==false){
+                    alert("关系属性不可为空");
+                    document.getElementById('wizard_prev').click(); 
+
+                }
+
+                //Step3前端显示
+                $("#DataSource_name").text(DataSource_name);
+                $("#DataSource_type").text(DataSource_type);
+                $("#DataTarget_name").text(DataTarget_json.Database_name);
+                $("#DataTarget_type").text(DataTarget_json.type);
+                $("#DataTarget_Address").text(DataTarget_json.IP+DataTarget_json.port);
+                $("#import_info_1").text("Running ETL on "+DataTarget_json.Database_name);
+                $("#import_info_2").text("Export from "+DataSource_name+" to "+DataTarget_json.Database_name);
+                $("#import_info_3").text("Data source path:"+DataSource_path);
+            }else if ($("#step3").attr("class")=="step-pane active") {
+                submit_second();    
+
+                
+            }
+            
+        });
+
+
+
+
+         /**
+         * 获取CSV、关系数据库信息
+         * @returns
+         */
+
+    </script>
+
+
+    
+    
+
+    <!-- 表单函数 -->
+    <script src="assets/plugins/wizard/js/loader.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        app.formWizard();
+    });
+
+    
+    var col_names = new Array();
+    $(".col_name").each(function(){
+        col_names.push($(this).val());
+    });
+    //获取去除的col_id列
+    $("table tbody").on('click','td :checkbox',function(){
+        col_choic_array=new Array();
+        $("#data_form_tbody :checkbox").each(function(){
+            if ($(this).is(':checked')) {
+                //alert($(this).val());
+                //col_choic_array.push($(this).val());
+            }else{
+                col_choic_array.push($(this).val());
+            }
+            
+        });
+        //alert(col_choic_array);  
+        
+    });
+    //1.nodelabels,relationshiptypes获取节点标签数组或者关系名
+    function get_labels(){
+        
+        var labels = new Array();
+        $(".label_select").each(function(){
+            labels.push($(this).val());     
+        });
+        
+        return labels;
+    };
+    function get_relation_type() {
+        
+        return  $(".label_select").val();
+            
+        // body...
+    }
+    //2.key,(start,end)获取节点关键字id列或关系起始列和结束列id
+    function get_key(arr){
+        var x="";
+        //var key_word = $("#key_select").find("option:selected").text();
+        var key_word = $("input[name='key_node']:checked").val();
+        key_word = parseInt(key_word);
+        //alert(key_word);
+        x=arr[key_word];
+
+        return x;
+    };
+    function get_key_id(){
+        var x="";
+        //var key_word = $("#key_select").find("option:selected").text();
+        var key_word = $("input[name='key_node']:checked").val();
+        key_word = parseInt(key_word);
+        //alert(key_word);
+        x='"keyindex":"'+key_word+'"';
+
+        return key_word;
+    };
+
+    function get_start(arr){
+        var  x="";
+        var start = $("input[name='start_node']:checked").val();
+        start= parseInt(start);
+        x=arr[start];
+        return x;
+    };
+
+    function get_end(arr){
+        var  x="";
+        var end = $("input[name='end_node']:checked").val();
+        end = parseInt(end);
+        x=arr[end];
+        return x;
+    };
+    function get_start_index(){
+        var  x="";
+        var start = $("input[name='start_node']:checked").val();
+        start= parseInt(start);
+        
+        return start;
+    };
+
+    function get_end_index(){
+        var  x="";
+        var end = $("input[name='end_node']:checked").val();
+        end = parseInt(end);
+        return end;
+    };
+    function get_start_attr(){
+        
+        var start = $(".start_attr_select").val();
+        
+        return start;
+    };
+
+    function get_end_attr(){
+        
+        var end = $(".end_attr_select").val();
+        
+        return end;
+    };
+    function get_start_labels(){
+        
+        var  y=new Array();
+        $("#start_labels_group .start_label_select").each(function(){
+
+            y.push($(this).val());
+        });
+        
+        return y;
+    };
+
+    function get_end_labels(){
+        var  y=new Array();
+        $("#end_labels_group .end_label_select").each(function(){
+
+            y.push($(this).val());
+        });
+        
+        return y;
+    };
+    //3.type获取数据类型，true为节点，false为关系
+    function get_data_type(){
+        var data_type = $("#node_or_relation").val();
+        var x = true;
+        if (data_type=="node") {
+            x=true;
+        }else{
+            x=false;
+        }
+        return x;
+    };
+    //4.path文件路径 String
+    function get_file_path(){
+        var path = $("#path").val();
+        var x = '"path":"'+path+'"';
+        return path;           
+    };
+    //5.encoding编码 String
+    function get_file_encoding(){
+        var encoding = $("#encoding").find("option:selected").text();
+        var x= '"encoding":"'+encoding+'"';
+        return encoding;
+    };
+    //6.separator分隔符 String
+    function get_file_separator(){
+        var separator = $("#separator").val();
+        var x= '"separator":"'+separator+'"';
+        return separator;
+    };
+    //7.header是否含有表头  true为有，false为无
+    function get_colname_has(){
+        var col_name_has = true;
+        if ($("#col_name_has").is(':checked')) {
+            var col_name_has=false;
+        }else{
+            var col_name_has=true;
+        }
+        return col_name_has;
+    };
+    //改
+    //8.index索引属性 HashMap<String,String>
+    function get_attr_index(){
+        var x =  new HashMap();
+        var y={};
+        var labels = new Array();
+        $(".index_1").each(function(){
+            labels.push($(this).val());
+        });
+        var attr = new Array();
+        $(".index_2").each(function(){
+             attr.push($(this).val());
+        });
+
+        for(prop in labels){
+            if(labels[prop]!=""&&attr[prop]!=""){
+                x.put(labels[prop],attr[prop]);
+                var a= labels[prop];
+                var b= attr[prop];
+                y[a]=b;
+            }
+        }
+
+        //var y = x.toString();
+        return y;
+
+    };
+
+    //9.constraint约束属性 HashMap<String,String>
+    function get_attr_constraint(){
+        var x =  new HashMap();
+        var y={};
+        var labels = new Array();
+        $(".constraint_1").each(function(){
+            labels.push($(this).val());
+        });
+        var attr = new Array();
+        $(".constraint_2").each(function(){
+             attr.push($(this).val());
+        });
+
+        for(prop in labels){
+            if(labels[prop]!=""&&attr[prop]!=""){
+                x.put(labels[prop],attr[prop])
+                var a= labels[prop];
+                var b= attr[prop];
+                y[a]=b;
+            }
+        }
+        //var y = x.toString();
+        return y;
+    };
+    //10.loadtype事务模式与否 true为是，false为非事务
+    function get_load_type(){
+        var load_type = $("input[name=rad1]:checked").val();
+        var x=true;
+        if (load_type=="1") {
+            x=true;
+        }else{
+            x=false;
+        }
+        return x;
+    };
+    //11.updatetype增量更新或全量更新 true是增量，false为全量
+    function get_updatetype(){
+        var update_type = $("input[name=rad2]:checked").val();
+        var x=true;
+        if (update_type=="add") {
+            x=true;
+        }else{
+            x=false;
+        }
+        return x;
+    };
+    //12.structure文件整体结构 HashMap<String,String> HashMap<属性名,属性类型>
+    function get_col_name_array(){
+        var col_names = new Array();
+        $(".col_name").each(function(){
+            col_names.push($(this).val());
+        });
+        return col_names;
+    };
+    //参数arr为列名数组
+    function get_structure(){
+        var str= new HashMap();
+        var y ={};
+
+        var col_names = new Array();
+        $(".col_name").each(function(){
+            col_names.push($(this).val());
+        });
+
+        var x=new Array();
+        $(".col_type").each(function(x){
+            var col_type=$(this).find("option:selected").text();
+            str.put(col_names[x],col_type);
+            var a= ""+col_names[x]+"";
+            y[a] = col_type;
+        });
+        //var y = str.toString();
+
+        return y;
+    };
+    //13.excludecolum不包含列 List<Integer>
+    function get_excludecolumn(){
+        return col_choic_array;
+    };
+    //14.filter筛选规则 String[]
+    function get_filter(){
+        var filter ="";
+        var filter = filter_maker();
+        //var filter = "["+filter+"]";
+        return filter;
+    };
+    </script>
+    <!-- 预览数据定义-->
+    <!-- 根据node_or_relation选择框的不同，表格里的添加项目会有所改变 1.起始列+结束列与关键字的转换 2.二次提交数据的起始列+结束列与关键字的提交数据改变-->
+    <script type="text/javascript">
+
+        //var data_node_or_relation = "node";
+        //$("#label_select_div_2").hide();
+        $("#node_or_relation").change(function(){
+            var data_node_or_relation = $("#node_or_relation").val();
+            var col_name_has = $("#col_name_has").is(':checked');
+            //alert(data_node_or_relation);
+            show_preview_data(data_node_or_relation,num_col,num_row,csv,col_name_has);
+            //alert(data_node_or_relation);
+            
+            if (data_node_or_relation=="node") {
+                //节点模式，可选多个标签，需要对label_select_div_2添加‘+’按钮
+                $("#label_select_div_2").show();
+                $('.label_select_div_1_add').show();
+                $('.label_select_div_2_add').show();
+                
+            }else{
+                //关系模式，只有一个标签,无需对label_select_div_2进行隐藏操作
+                $("#label_select_div_2").hide();
+                $('.label_select_div_1_add').hide();
+                $('.label_select_div_2_add').hide();
+               
+            }
+            
+
+        });
+
+        $("#add_label").on('click',function(){
+            var x=$(".del_label_bt").length;
+            var del = "del_bt_"+x;
+            $("#label_select_div").append('<div><div id="label_select_div_1_'+x+'" class="form-group col-sm-12 label_select_div_1_add"><input  class="form-control label_select" list ="label_datalist" /><datalist id ="label_datalist" ></datalist></div><div id="label_select_div_2_'+x+'" class="form-group col-sm-1 label_select_div_2_add"><button id = "'+del+'"type="button" class="btn btn-default del_label_bt">-</button></div></div>');
+        });
+
+    $(function(){
+
+        $("#label_select_div").on('click','.del_label_bt',function(){
+            //alert("123");
+            $(this).parent('div').parent('div').remove();
+        });
+        $("#index_group").on('click','.del_index_bt',function(){
+            $(this).parent('div').parent('div').remove();
+        });
+        $("#constraint_group").on('click','.del_constraint_bt',function(){
+            $(this).parent('div').parent('div').remove();
+        });
+        $("#filter_group").on('click','.del_filter_bt',function(){
+            $(this).parent('div').parent('div').remove();
+        });
+        $("#start_labels_group").on('click','.del_start_label_bt',function(){
+            $(this).parent('div').parent('div').remove();
+        });
+        $("#end_labels_group").on('click','.del_end_label_bt',function(){
+            $(this).parent('div').parent('div').remove();
+        });
+
+
+
+    })
+
+
+
+        
+        //点击add_filter 添加新的一行筛选规则
+
+        $("#add_filter").on('click',function(){
+            $("#filter_group").append('<div class="filter_group_1"><div class="form-group col-sm-4"><input  class="form-control filter_1" list ="filter_1_datalist" /><datalist id ="filter_1_datalist" ></datalist></div><div class="form-group col-sm-4"><select class="form-control filter_2"><option value="">=</option><option value="">></option><option value=""><</option><option value="">=<</option><option value="">>=</option><option value="">!=</option><option value="">包含</option><option value="">不包含</option></select></div><div class="form-group col-sm-4"><input class="form-control filter_3" type="text" name=""></div><div class="form-group col-sm-1"><button  type="button" class="btn btn-primary del_filter_bt">-</button></div><div>');
+
+        });
+        //点击add_index 添加新的一行索引
+
+        $("#add_index").on('click',function(){
+            $("#index_group").append('<div class="index_group_1"><div class="form-group col-sm-6"><input  placeholder="标签" class="form-control index_1" list ="label_datalist" /><datalist id ="label_datalist" ></datalist></div><div class="form-group col-sm-6"><input  placeholder="属性" class="form-control index_2" list ="filter_1_datalist" /><datalist id ="filter_1_datalist" ></datalist></div><div class="form-group col-sm-1"><button  type="button" class="btn btn-primary del_index_bt">-</button></div></div>');
+
+        });
+        //点击add_constraint添加新的一行约束
+
+        $("#add_constraint").on('click',function(){
+            $("#constraint_group").append('<div class="constraint_group_1"><div class="form-group col-sm-6"><input  placeholder="标签" class="form-control constraint_1" list ="label_datalist" /><datalist id ="label_datalist" ></datalist></div><div class="form-group col-sm-6"><input  placeholder="属性" class="form-control constraint_2" list ="filter_1_datalist" /> <datalist id ="filter_1_datalist" > </datalist></div><div class="form-group col-sm-1"><button  type="button" class="btn btn-primary del_constraint_bt">-</button></div></div>');
+        });
+
+        //点击add_start_label添加新一行start_label
+
+        $("#add_start_label").on('click',function(){
+            $("#start_labels_group").append(start_label_select_str);
+        });
+
+        //点击add_end_label添加新一行end_label
+        $("#add_end_label").on('click',function(){
+            $("#end_labels_group").append(end_label_select_str);
+        });
+
+    </script>
+
+
+
+    <!-- csv表有无表头设置 col_name_has 若选中无表头，则将col_name列向后移动一列 -->
+    <script type="text/javascript">
+        $("#col_name_has").change(function(){
+            //alert($(this).is(':checked'));
+            var data_node_or_relation = $("#node_or_relation").val();
+            var col_name_has = $("#col_name_has").is(':checked');
+            //alert(data_node_or_relation);
+            show_preview_data(data_node_or_relation,num_col,num_row,csv,col_name_has);
+            //filter_1();
+            
+        });
+    </script>
+
+
+    <!-- 二次数据提交-->
+    <script type="text/javascript">
+    /*$("#col_0name").bind('input propertychange',function(){
+            alert("123");
+            var col_name_array = new Array();
+            $("#data_form_tbody .col_name").each(function(){
+                col_name_array.push($(this).val());
+                            //alert(col_name_array);
+            });
+
+            //1.start-key-end
+            var option_add = "";
+            for(var prop in col_name_array){
+                option_add = option_add+'<option>'+col_name_array[prop]+'</option>';
+            }
+            $("#start_select").html(option_add);
+            $("#end_select").html(option_add);
+    });*/
+
+
+    //容器：不包含列、关键字（起始列、结束列）
+    var col_choic_array=new Array();
+    var col_key_array=new Array();
+    
+
+    //筛选规则获取函数
+
+    function filter_maker(){
+        //alert("123");
+        var col_name_array = get_col_name_array();
+        var filter = new Array();
+        var filter_num = $(".filter_group_1").length;
+        //alert(filter_num);
+        var filter_1s = new Array();
+        $(".filter_1").each(function(){
+            var a = col_name_array.indexOf($(this).val());
+            if(a==-1){
+                filter_1s.push("")
+            }else{
+                filter_1s.push(a);
+            }
+            
+        });
+        var filter_2s = new Array();
+        $(".filter_2").each(function(){
+            filter_2s.push($(this).find("option:selected").text());
+        });
+        var filter_3s = new Array();
+        $(".filter_3").each(function(){
+            if(isNaN($(this).val())){
+                var x= $(this).val()+"";
+                filter_3s.push(x);
+            }else{
+                var x = parseInt($(this).val());
+                filter_3s.push(x);
+            }
+            
+        });
+        
+        for(var i=0;i<filter_num;i++){
+            if (filter_1s[i]!=""&&filter_3s[i]!="") {
+                //filter = filter+filter_1s[i]+","+filter_2s[i]+","+filter_3s[i]+",";
+                filter.push(filter_1s[i]);
+                filter.push(filter_2s[i]);
+                filter.push(filter_3s[i]);
+            }
+        }
+        //alert(filter);
+        return filter;
+    };
+
+    function submit_second(){
+
+        var data_type = $("#node_or_relation").val();
+
+        var col_names = new Array();
+        $(".col_name").each(function(){
+            col_names.push($(this).val());
+        });
+        
+
+
+
+        //提交数据整理
+        var send_second ={};
+        send_second.type = get_data_type();
+        send_second.path = get_file_path();
+        send_second.encoding = get_file_encoding();
+        send_second.separator = get_file_separator();
+        send_second.header = get_colname_has();
+
+        send_second.loadtype = get_load_type();
+        send_second.updatetype = get_updatetype();
+        send_second.structure = get_structure();
+        send_second.excludecolumn = get_excludecolumn();
+        send_second.filter = get_filter();
+        //var send_second = "";
+        if (data_type=="node") {
+            send_second.nodelabels=get_labels();
+            send_second.key = get_key(col_names);
+            send_second.keyindex = get_key_id();
+            send_second.index = get_attr_index();
+            send_second.constrain = get_attr_constraint();
+            //send_second = '{"nodelabels":['+get_labels()+'],'+get_key()+','+get_data_type()+','+get_file_path()+','+get_file_encoding()+','+get_file_separator()+','+get_colname_has()+','+'"index":{'+get_attr_index()+'},"constraint":{'+get_attr_constraint()+'},'+get_load_type()+','+get_updatetype()+',"structure":{'+get_structure(col_names)+'},'+get_excludecolum()+',"filter":['+get_filter()+']}';
+        }else{
+            send_second.relationshiptypes = get_relation_type();
+            send_second.start = get_start(col_names);
+            send_second.end = get_end(col_names);
+            send_second.startindex = get_start_index();
+            send_second.endindex = get_end_index();
+            if (get_updatetype()==true) {
+                //事务模式下关系
+                
+                send_second.startlabels = get_start_labels();
+                send_second.endlabels = get_end_labels();
+
+                send_second.startpropertyname = get_start_attr();
+                send_second.endpropertyname = get_end_attr();
+            }else{
+                
+            }
+
+        }
+ 
+        //alert(send_second);
+        console.log(send_second);
+        //var send_second_json = JSON.parse(send_second);
+
+
+
+        jQuery.ajax({
+            type: 'POST',
+            url:"batchimportntxt.do",
+            data : JSON.stringify(send_second),
+            contentType:"application/json",
+            dataType: 'text', 
+            beforeSend:function (){
+                showModal();  
+            },       
+            success : function(result) {
+                hideModal();
+                //alert(result);
+                $("#import_result").text(result);
+                console.log(result);
+                                      
+            },
+            error: function(){
+                hideModal();
+            }
+         });
+         //return send_second;
+
+    };
+
+    </script>
+
+
+
+
+
+
+    <script type="text/javascript">
+        function HashMap(){
+            var size = 0;// Map大小
+            var entry = new Object();// 对象
+
+            // Map的存put方法
+            this.put = function(key, value) {
+                if (!this.containsKey(key)) {
+                    size++;
+                    entry[key] = value;
+                }
+            }
+
+            // Map取get方法
+            this.get = function(key) {
+                return this.containsKey(key) ? entry[key] : null;
+            }
+
+            // Map删除remove
+            this.remove = function(key) {
+                if (this.containsKey(key) && (delete entry[key])) {
+                    size--;
+                }
+            }
+
+            // 是否包含Key
+            this.containsKey = function(key) {
+                return (key in entry);
+            }
+            // 是否包含Value
+            this.containsValue = function(value) {
+                for ( var prop in entry) {
+                    if (isObjectValueEqual(entry[prop], value)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            // 所有的Value
+            this.values = function() {
+                var values = new Array();
+                for ( var prop in entry) {
+                    values.push(entry[prop]);
+                }
+                return values;
+            }
+
+            // 所有的 Key
+            this.keys = function() {
+                var keys = new Array();
+                for ( var prop in entry) {
+                    keys.push(prop);
+                }
+                return keys;
+            }
+
+            // Map size
+            this.size = function() {
+                return size;
+            }
+
+            // 清空Map
+            this.clear = function() {
+                size = 0;
+                entry = new Object();
+            }
+            //Map转字符串
+            this.toString = function(){
+                var s = "";
+
+                for(var prop in entry){
+                    if (s!="") {
+                        s=s+",";
+                    }
+                    s=s+'"'+prop+'":"'+entry[prop]+'"';
+                }
+                return s;
+            }
+        }
+
+
+ 
+    </script>
+
+</body>
+
+</html>

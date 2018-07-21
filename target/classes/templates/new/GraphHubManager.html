@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+
+<html class="no-js" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>GraphHub</title>
+<meta name="description" content="">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="assets/img/favicon.ico"
+	type="image/x-icon">
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet"
+	href="assets/plugins/bootstrap/css/bootstrap.min.css">
+<!-- DataTables-->
+<link rel="stylesheet"
+	href="assets/plugins/dataTables/css/dataTables.css">
+<link rel="stylesheet" type="text/css"
+	href="table/css/dataTables.bootstrap.css">
+<!-- Fonts  -->
+<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/simple-line-icons.css">
+<!-- CSS Animate -->
+<link rel="stylesheet" href="assets/css/animate.css">
+<!--Page Level CSS-->
+<link rel="stylesheet" href="assets/plugins/icheck/css/all.css">
+<!-- Switchery -->
+<link rel="stylesheet" href="assets/plugins/switchery/switchery.min.css">
+<!-- Custom styles for this theme -->
+<link rel="stylesheet" href="assets/css/main.css">
+<!-- Feature detection -->
+<script src="assets/js/vendor/modernizr-2.6.2.min.js"></script>
+
+<style type="text/css">
+.col-md-0 {
+	display: none;
+}
+
+.node {
+	stroke: #222;
+	stroke-width: 1.5px;
+}
+
+.node.B {
+	fill: #ff0000;
+}
+
+.node.C {
+	fill: #37ff00;
+}
+
+.node.P {
+	fill: #ff68fb;
+}
+
+.node.Per {
+	fill: #fff50d;
+}
+
+.node.Com {
+	fill: #fff50d;
+}
+
+.node.Com.xiaodai {
+	fill: #d94600;
+}
+
+.node.Com.dichan {
+	fill: #8600ff;
+}
+
+.link {
+	stroke: #999;
+	stroke-opacity: .6; /*stroke-width: 1; IE 浏览器爆炸*/
+	fill: none;
+}
+
+.link.DB {
+	stroke: #8B0000;
+}
+
+.link.JY {
+	stroke: #757575;
+}
+
+.link.DK {
+	stroke: #1F7CF3;
+}
+
+.link.DY {
+	stroke: #EEAD0E;
+}
+
+.link.ZDB {
+	stroke: #20B2AA;
+}
+
+.link.GL {
+	stroke: #7D26CD;
+}
+
+.text {
+	fill: black;
+	font-size: 8px; "
+	text-anchor ": "middle";
+}
+
+.arc {
+	fill: #d2d5da;
+}
+
+.link.shadow:hover {
+	opacity: 1;
+	stroke: #87D489;
+}
+
+.main-content-wrapper #main-content {
+	padding: 0 15px 0 15px;
+	width: 100%;
+}
+
+.myform {
+	width: 100%;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 0;
+	padding-bottom: 5px;
+}
+
+.col-md-2, .col-md-8, .col-md-10, .col-md-12 {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+#center_part .panel-body .tab-wrapper {
+	margin-bottom: 0;
+}
+
+#center_part .panel-body .tab-content {
+	/* height:800px; */
+	/* overflow-y:hidden; */
+	
+}
+
+.isClicked {
+	background: #717172;
+}
+
+.modal-dialog1 {
+	margin: 20% 50%;
+}
+
+.table tbody tr td {
+	/* table-layout:fixed; */ /*表格宽度固定*/
+	word-wrap: break-word; /*换行*/
+	word-break: break-all; /*换行*/
+	text-align: center; /*文字水平居中*/
+	vertical-align: middle; /*垂直居中*/
+}
+
+.form-control {
+	border: 2px solid black;
+}
+
+::selection {
+	background: #6C6;
+	color: #fff;
+}
+
+table pre {
+	background-color: transparent;
+	border: 0px solid #ccc;
+}
+
+#nodeInfo, #nodeSize {
+	text-transform: none;
+}
+
+table {
+	border-collapse: collapse;
+	font-family: Futura, Arial, sans-serif;
+}
+
+caption {
+	font-size: larger;
+	margin: 1em auto;
+}
+
+th, td {
+	padding: .65em;
+}
+
+th, td {
+	border-bottom: 1px solid #ddd;
+	border-top: 1px solid #ddd;
+	text-align: center;
+}
+
+.INP {
+	width: 350px;
+	height: 30px;
+	line-height: 30px;
+	right: 0;
+}
+
+.lab {
+	width: 100px;
+	float: left;
+}
+
+.but {
+	width: 50px;
+	float: right;
+}
+
+a.dropdown-toggle {
+	background: none !important;
+}
+</style>
+
+</head>
+
+<body>
+	<section id="main-wrapper" class="theme-green-full">
+		<header id="header">
+			<ul class="nav navbar-nav navbar-left">
+				<li class="toggle-navigation toggle-left">
+					<button class="sidebar-toggle" id="toggle-left">
+						<i class="fa fa-bars"></i>
+					</button>
+				</li>
+
+			</ul>
+			<!--logo start-->
+			<div class="brand col-md-6 col-md-offset-5">
+				<a href="new_index.html" class="logo"
+					style="text-transform: capitalize;"> <i class="icon-layers"></i>Graphub
+				</a>
+			</div>
+			<!--logo end-->
+
+			<ul class="nav navbar-nav navbar-right">
+				<li class="toggle-profile hidden-xs">
+					<ul class="nav navbar-nav">
+						<li class="dropdown">
+							<button type="button" class="btn btn-default" id="toggle-profile">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+									class="icon-user"></i><b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">个人信息</a></li>
+									<li><a href="#">消息</a></li>
+									<li><a href="#">设置</a></li>
+									<li class="divider"></li>
+									<li><a href="logout">注销</a></li>
+								</ul>
+							</button>
+						</li>
+					</ul>
+				</li>
+				<li class="toggle-fullscreen hidden-xs">
+					<button type="button" class="btn btn-default expand"
+						id="toggle-fullscreen">
+						<i class="fa fa-expand"></i>
+					</button>
+				</li>
+			</ul>
+		</header>
+
+		<!--sidebar left start-->
+		<aside class="sidebar sidebar-left">
+			<nav style="margin-top: 10px;">
+				<!--  <h5 class="sidebar-header">导航栏</h5> -->
+				<ul class="nav nav-pills nav-stacked">
+
+					<li class=" nav-dropdown"><a href="new_index.html"
+						title="HomePage"> <i class="fa  fa-fw fa-tachometer"></i> 主页
+					</a></li>
+
+					<li class="nav-dropdown"><a href="LoadData.html" title="ETL">
+							<i class="fa  fa-fw fa-cogs"></i> 数据导入
+					</a></li>
+
+					<li class="nav-dropdown"><a href="GraphBrowse.html"
+						title="GraphBrowse"> <i class="fa  fa-fw fa-th-list"></i> 图谱浏览
+					</a></li>
+
+					<li class="nav-dropdown"><a href="#" title="AnalyticModel">
+							<i class="fa fa-fw fa-bar-chart-o"></i> 分析模型
+					</a>
+						<ul class="nav-sub">
+							<li><a href="QueryModel.html" title="QueryModel">查询模型</a></li>
+							<li><a href="TraversalModel.html" title="TraversalModel">遍历模型</a></li>
+							<li><a href="StatisticsModel.html" title="StatisticsModel">
+									统计模型 </a></li>
+							<li><a href="LearnModel.html" title="LearnModel">学习模型</a></li>
+							<li><a href="MiningModel.html" title="MiningModel">挖掘模型</a></li>
+						</ul></li>
+
+					<li class=" active"><a href="/GraphHubManager"
+						title="GraphEdit"> <i class="fa  fa-fw fa-edit"></i> 平台管理
+					</a></li>
+
+				</ul>
+			</nav>
+		</aside>
+		<section class="main-content-wrapper">
+
+			<section id="main-content" class="animated fadeInUp">
+				<div class="row">
+					<div id="left_part"
+						class="col-md-2 col-sm-12 col-xs-12 col-lg-2 animated fadeInUp">
+						<aside class="panel">
+							<div class="panel-heading">
+								<!-- <h3 class="panel-title">保存</h3> -->
+								<i class="fa fa-star"></i>
+								<div class="actions pull-right">
+									<i class="fa fa-expand"></i> <i class="fa fa-chevron-down"></i>
+								</div>
+							</div>
+							<aside class="panel-body">
+								<button class="btn btn-success btn-block">
+									<!--<a th:href="@{/Neo4jList}">&nbsp;&nbsp;&nbsp;&nbsp;图数据库</a>-->
+									<a onclick="Neo4jAdd()" class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;图数据库</a>
+								</button>
+								<ul id="myTab" class="nav nav-tabs">
+									<li class="active"><a href="#home" data-toggle="tab">远程配置
+									</a></li>
+									<li><a href="#local" data-toggle="tab">本地配置</a></li>
+								</ul>
+								<ul id="my_save" class="nav nav-pills nav-stacked compose-nav"
+									style="height: 350px; overflow-y: auto">
+									<div id="myTabContent" class="tab-content">
+										<div class="tab-pane fade in active" id="home">
+											<div id="data_source_1">
+												<table align="center">
+													<thead>
+														<tr>
+															<th>ID
+															<th>名称
+															<th>删除
+															<th>查看
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="news : ${Neo4jList}">
+															<td th:text="${news.neo4j_id}">Onions</td>
+															<td th:text="${news.neo4j_name}">Onions</td>
+															<td><a
+																th:onclick="'javascript:Neo4jDelete(\''+${news.neo4j_id}+'\')'"
+																title="删除"><i class="fa fa-trash-o text-navy"></i></a></td>
+															<td><a
+																th:onclick="'javascript:Neo4jList(\''+${news.neo4j_id}+'\')'"
+																title="查看"><i class="fa fa-eye text-navy"></i></a></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="local">
+											<div id="data_source_1">
+												<table align="center">
+													<thead>
+														<tr>
+															<th>ID
+															<th>名称
+															<th>删除
+															<th>查看
+														</tr>
+													</thead>
+													<tbody>
+														<tr th:each="news : ${Neo4jListLocal}">
+															<td th:text="${news.embedded_neo4j_id}">Onions</td>
+															<td th:text="${news.embedded_neo4j_name}">Onions</td>
+															<td><a
+																th:onclick="'javascript:Neo4jLocalDelete(\''+${news.embedded_neo4j_id}+'\')'"
+																title="删除"><i class="fa fa-trash-o text-navy"></i></a></td>
+															<td><a
+																th:onclick="'javascript:Neo4jLocalList(\''+${news.embedded_neo4j_id}+'\')'"
+																title="查看"><i class="fa fa-eye text-navy"></i></a></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</ul>
+								<button class="btn btn-success btn-block">
+									<!--<a th:href="@{/GraphXList}">&nbsp;&nbsp;&nbsp;&nbsp;图计算引擎</a>-->
+									<a onclick="GraphXAdd()" class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;图计算引擎</a>
+								</button>
+								<ul id="my_history"
+									class="nav nav-pills nav-stacked compose-nav"
+									style="height: 350px; overflow-y: auto">
+									<table align="center">
+										<thead>
+											<tr>
+												<th>ID
+												<th>名称
+												<th>删除
+												<th>查看
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="news : ${GraphXList}">
+												<td th:text="${news.graphX_id}">Onions</td>
+												<td th:text="${news.graphX_name}">Onions</td>
+												<td><a
+													th:onclick="'javascript:GraphXDelete(\''+${news.graphX_id}+'\')'"
+													title="删除"><i class="fa fa-trash-o text-navy"></i></a></td>
+												<td><a
+													th:onclick="'javascript:GraphXList(\''+${news.graphX_id}+'\')'"
+													title="查看"><i class="fa fa-eye text-navy"></i></a></td>
+											</tr>
+										</tbody>
+									</table>
+
+								</ul>
+
+							</aside>
+						</aside>
+
+					</div>
+					<!--中央panel -->
+					<div id="centrt_panel"
+						class="col-md-10 col-sm-12 col-xs-12 col-lg-10 animated fadeInUp">
+
+						<div
+							class="col-md-12 col-sm-12 col-xs-12 col-lg-12 animated fadeInUp">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="panel panel-default">
+										<div class="panel-body">
+											<h3 class="panel-title">搜索&amp;操作</h3>
+											<div class="actions pull-right">
+												<i class="fa fa-expand"></i> <i class="fa fa-chevron-down"></i>
+											</div>
+										</div>
+										<div class="panel-body">
+											<div class="wizard"></div>
+											<div class="step-content">
+												<div>
+													<form action="newsManage_0_0_0">
+														<div class="row">
+															<div class="col-sm-3 m-b-xs">
+																<input id="title" name="title" placeholder="GrapHub名称"
+																	class="form-control" type="text" />
+															</div>
+															<div class="col-sm-2 m-b-xs">
+																<select name="category" id="category"
+																	class="form-control">
+																</select>
+															</div>
+															<div class="col-sm-2 m-b-xs">
+																<select name="commendState" id="commendState"
+																	class="form-control">
+																</select>
+															</div>
+															<div class="col-sm-2 m-b-xs">
+																<select name="orderBy" id="orderBy" class="form-control">
+																</select>
+															</div>
+															<div class="col-sm-2 m-b-xs">
+																<button class="btn btn-success btn-block" type="submit">
+																	<i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;&nbsp;<strong>搜索</strong>
+																</button>
+															</div>
+														</div>
+													</form>
+													<div>
+														<div>
+															<button class="btn btn-success">
+																<a th:href="@{/GraphubAddInput}"><i
+																	class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;&nbsp;新增GrapHub&nbsp;&nbsp;&nbsp;&nbsp;</a>
+															</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div
+							class="col-md-12 col-sm-12 col-xs-12 col-lg-12 animated fadeInUp">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="panel panel-default">
+										<div class="panel-body">
+											<h3 class="panel-title">GrapHub列表</h3>
+											<div class="actions pull-right">
+												<i class="fa fa-expand"></i> <i class="fa fa-chevron-down"></i>
+											</div>
+										</div>
+										<div class="panel-body">
+											<div id="MyWizard" class="wizard"></div>
+											<div class="step-content">
+												<div id="data_source_1" class="panel-body">
+													<table class="table table-bordered">
+														<thead>
+															<tr>
+																<th>ID</th>
+																<th>名称</th>
+																<th>用户名</th>
+																<th>图数据库</th>
+																<th>图计算引擎</th>
+																<th>创建时间</th>
+																<th>删除</th>
+																<th>编辑</th>
+																<th>状态</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr th:each="news : ${newsList}">
+																<td th:text="${news.graphub_id}">Onions</td>
+																<td th:text="${news.graphub_name}">Onions</td>
+																<td th:text="${session.UserName}">Onions</td>
+																<td class="test"><a
+																	th:text="${news.neo4j} ? ${news.neo4j.neo4j_name} : (${news.neo4jLocal} ? ${news.neo4jLocal.embedded_neo4j_name} : null)"
+																	th:onclick="${news.neo4j} ? 'javascript:showDialog(\''+${news.neo4j}+'\')' :'javascript:showDialog(\''+ ${news.neo4jLocal}+'\')'"></a></td>
+																<td class="test"><a
+																	th:text="${news.graphX} ? ${news.graphX.graphX_name} : null"
+																	th:onclick="'javascript:showDialog(\''+${news.graphX}+'\')'"></a></td>
+																<td
+																	th:text="${#dates.format(news.graphub_createtime,'yyyy-MM-dd HH:mm:ss')}">Onions</td>
+																<td><a
+																	th:href="@{'/GraphubDelete/'+${news.graphub_id}}"
+																	title="删除"><i class="fa fa-trash-o text-navy"></i></a></td>
+																<td><a
+																	th:href="@{'/GraphubEditInput/'+${news.graphub_id}}"
+																	title="修改"><i class="fa fa-edit text-navy"></i></a></td>
+																<td><button>
+																		<a
+																			th:href="@{'/GraphubStateChange/'+${news.graphub_id}}"
+																			th:text="${news.state==1} ? Active : Inactive"></a>
+																	</button></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</section>
+		</section>
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">详细信息</h4>
+					</div>
+					<div class="modal-body" id="show_message"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="Neo4jLocal2Look" tabindex="-1"
+			role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Neo4j配置信息</h4>
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">ID: </label> <input type="text" class="INP"
+							id="embedded_neo4j_id" name="embedded_neo4j_id"
+							readonly="readonly">
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">名称: </label> <input type="text" class="INP"
+							id="embedded_neo4j_name" name="embedded_neo4j_name"> <i
+							class="fa fa-edit text-navy" style="float: right;"></i>
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">路径: </label> <input type="text" class="INP"
+							id="embedded_neo4j_path" name="embedded_neo4j_path"> <i
+							class="fa fa-edit text-navy" style="float: right;"></i>
+
+					</div>
+					<div class="modal-body">
+						<label class="lab">所属用户: </label> <input type="text" class="INP"
+							id="userName" name="userName" readonly="readonly">
+
+					</div>
+					<div class="modal-body">
+						<label class="lab">创建时间: </label> <input type="text" class="INP"
+							id="embedded_neo4j_createtime" name="embedded_neo4j_createtime"
+							readonly="readonly">
+					</div>
+
+					<div class="modal-footer">
+						<input class="btn btn-primary" type="submit" value="删除配置信息"
+							onclick="Neo4jLocalDelete(embedded_neo4j_id.value)"
+							style="float: left;" /> <label style="color: green;">若修改配置，请提交</label>
+						<input class="btn btn-primary" type="submit"
+							onclick="neo4jLocalEdit()" value="提 交" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="Neo4j2Look" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Neo4j配置信息</h4>
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">ID: </label> <input type="text" class="INP"
+							id="neo4j_id" name="neo4j_id" readonly="readonly">
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">名称: </label> <input type="text" class="INP"
+							id="neo4j_name" name="neo4j_name"> <i
+							class="fa fa-edit text-navy" style="float: right;"></i>
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">IP: </label> <input type="text" class="INP"
+							id="neo4j_ip" name="neo4j_ip"> <i
+							class="fa fa-edit text-navy" style="float: right;"></i>
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">端口: </label> <input type="text" class="INP"
+							id="neo4j_port" name="neo4j_port"> <i
+							class="fa fa-edit text-navy" style="float: right;"></i>
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">所属用户: </label> <input type="text" class="INP"
+							id="userNameLocal" name="userNameLocal" readonly="readonly">
+					</div>
+					<div class="modal-body">
+						<label class="lab">Neo4j用户名: </label> <input type="text"
+							class="INP" id="neo4j_user" name="neo4j_user"> <i
+							class="fa fa-edit text-navy" style="float: right;"></i>
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">Neo4j密码: </label> <input type="text"
+							class="INP" id="neo4j_password" name="neo4j_password"> <i
+							class="fa fa-edit text-navy" style="float: right;"></i>
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">版本: </label> <input type="text" class="INP"
+							id="neo4j_editon" name="neo4j_editon"> <i
+							class="fa fa-edit text-navy" style="float: right;"></i>
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">创建时间: </label> <input type="text" class="INP"
+							id="neo4j_createtime" name="neo4j_createtime" readonly="readonly">
+					</div>
+
+					<div class="modal-footer">
+						<input class="btn btn-primary" type="submit" value="删除配置信息"
+							onclick="Neo4jDelete(neo4j_id.value)" style="float: left;" /> <label
+							style="color: green;">若修改配置，请提交</label> <input
+							class="btn btn-primary" type="submit" onclick="neo4jEdit()"
+							value="提 交" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="GraphX2Look" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">GraphX配置信息</h4>
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">ID: </label> <input type="text" class="INP"
+							id="graphX_id" name="graphX_id" readonly="readonly">
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">名称: </label> <input type="text" class="INP"
+							id="graphX_name" name="graphX_name"><i
+							class="fa fa-edit text-navy" style="float: right;"></i>
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">IP: </label> <input type="text" class="INP"
+							id="graphX_ip" name="graphX_ip"><i
+							class="fa fa-edit text-navy" style="float: right;"></i>
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">端口: </label> <input type="text" class="INP"
+							id="graphX_port" name="graphX_port"><i
+							class="fa fa-edit text-navy" style="float: right;"></i>
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">所属用户: </label> <input type="text" class="INP"
+							id="userNameGraphX" name="userNameGraphX" readonly="readonly">
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">版本: </label> <input type="text" class="INP"
+							id="graphX_version" name="graphX_version"><i
+							class="fa fa-edit text-navy" style="float: right;"></i>
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">算法: </label> <input type="text" class="INP"
+							id="graphX_algorithm" name="graphX_algorithm"><i
+							class="fa fa-edit text-navy" style="float: right;"></i>
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">操作: </label> <input type="text" class="INP"
+							id="graphX_operation" name="graphX_operation"><i
+							class="fa fa-edit text-navy" style="float: right;"></i>
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">创建时间: </label> <input type="text" class="INP"
+							id="graphX_createtime" name="graphX_createtime"
+							readonly="readonly">
+					</div>
+
+					<div class="modal-footer">
+						<input class="btn btn-primary" type="submit" value="删除配置信息"
+							onclick="GraphXDelete(graphX_id.value)" style="float: left;" />
+						<label style="color: green;">若修改配置，请提交</label> <input
+							class="btn btn-primary" type="submit" onclick="graphXEdit()"
+							value="提 交" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="GraphXAddtk" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">添加GraphX配置信息</h4>
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">名称: </label> <input type="text" class="INP"
+							id="graphX_nameadd" name="graphX_nameadd">
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">IP: </label> <input type="text" class="INP"
+							id="graphX_ipadd" name="graphX_ipadd">
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">端口: </label> <input type="text" class="INP"
+							id="graphX_portadd" name="graphX_portadd">
+					</div>
+
+					<input type="hidden" id="user_Idadd" name="user_Idadd"
+						th:value="${session.UserID}" />
+
+					<div class="modal-body">
+						<label class="lab">版本: </label> <input type="text" class="INP"
+							id="graphX_versionadd" name="graphX_versionadd">
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">算法: </label> <input type="text" class="INP"
+							id="graphX_algorithmadd" name="graphX_algorithmadd">
+					</div>
+
+					<div class="modal-body">
+						<label class="lab">操作: </label> <input type="text" class="INP"
+							id="graphX_operationadd" name="graphX_operationadd">
+					</div>
+
+					<div class="modal-footer">
+						<label style="color: green;">若配置填写完后，请提交</label> <input
+							class="btn btn-primary" type="submit" onclick="GraphXAddSubmit()"
+							value="提 交" />
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="Neo4jAddtk" tabindex="-1" role="dialog"
+			aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active"><a href="#home1" data-toggle="tab">添加Neo4j远程配置
+							</a></li>
+							<li><a href="#local1" data-toggle="tab">添加Neo4j本地配置</a></li>
+						</ul>
+					</div>
+
+					<div id="myTabContent" class="tab-content">
+						<div class="tab-pane fade in active" id="home1">
+							<div class="modal-body">
+								<label class="lab">名称: </label> <input type="text" class="INP"
+									id="neo4j_nameadd" name="neo4j_nameadd">
+							</div>
+
+							<div class="modal-body">
+								<label class="lab">IP: </label> <input type="text" class="INP"
+									id="neo4j_ipadd" name="neo4j_ipadd">
+							</div>
+
+							<div class="modal-body">
+								<label class="lab">端口: </label> <input type="text" class="INP"
+									id="neo4j_portadd" name="neo4j_portadd">
+							</div>
+
+							<input type="hidden" id="user_IdaddNeo4j" name="user_IdaddNeo4j"
+								th:value="${session.UserID}" />
+
+							<div class="modal-body">
+								<label class="lab">Neo4j用户名: </label> <input type="text"
+									class="INP" id="neo4j_useradd" name="neo4j_useradd">
+							</div>
+
+							<div class="modal-body">
+								<label class="lab">Neo4j密码: </label> <input type="text"
+									class="INP" id="neo4j_passwordadd" name="neo4j_passwordadd">
+							</div>
+
+							<div class="modal-body">
+								<label class="lab">版本: </label> <input type="text" class="INP"
+									id="neo4j_editonadd" name="neo4j_editonadd">
+							</div>
+
+							<div class="modal-footer">
+								<label style="color: green;">若配置填写完后，请提交</label> <input
+									class="btn btn-primary" type="submit"
+									onclick="Neo4jAddSubmit()" value="提 交" />
+							</div>
+						</div>
+
+						<div class="tab-pane fade" id="local1">
+							<div class="modal-body">
+								<label class="lab">名称: </label> <input type="text" class="INP"
+									id="embedded_neo4j_nameadd" name="embedded_neo4j_nameadd">
+							</div>
+							<input type="hidden" id="user_IdaddNeo4jLocal" name="user_IdaddNeo4jLocal"
+								th:value="${session.UserID}" />
+							<div class="modal-body">
+								<label class="lab">路径: </label> <input type="text" class="INP"
+									id="embedded_neo4j_pathadd" name="embedded_neo4j_pathadd">
+							</div>
+
+							<div class="modal-footer">
+								<label style="color: green;">若配置填写完后，请提交</label> <input
+									class="btn btn-primary" type="submit"
+									onclick="Neo4jLocalAddSubmit()" value="提 交" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="assets/js/vendor/jquery-1.11.1.min.js"></script>
+	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/plugins/navgoco/jquery.navgoco.min.js"></script>
+	<script src="assets/plugins/pace/pace.min.js"></script>
+	<script src="assets/plugins/fullscreen/jquery.fullscreen-min.js"></script>
+	<script src="assets/js/src/app.js"></script>
+
+	<!--  -->
+	<script type="text/javascript" src="laydate/laydate.js"></script>
+	<script type="text/javascript" src="javascripts/d3.js"></script>
+	<script type="text/javascript" src="javascripts/wy.js"></script>
+	<script type="text/javascript" src="javascripts/dx.js"></script>
+	<script type="text/javascript" src="javascripts/srf.js"></script>
+	<script type="text/javascript" src="javascripts/util.js"></script>
+	<script type="text/javascript" src="javascripts/savePNG.js"></script>
+
+	<script type="text/javascript" src="table/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="table/js/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" src="table/js/dataTables.buttons.js"></script>
+	<script type="text/javascript" src="table/js/buttons.bootstrap.js"></script>
+	<script type="text/javascript" src="table/js/jszip.js"></script>
+	<script type="text/javascript" src="table/js/buttons.html5.js"></script>
+
+
+	<!--Page Level JS-->
+	<script src="assets/plugins/countTo/jquery.countTo.js"></script>
+	<script src="assets/plugins/weather/js/skycons.js"></script>
+	<script src="assets/plugins/daterangepicker/moment.min.js"></script>
+	<script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+
+	<!-- Morris  -->
+	<script src="assets/plugins/morris/js/morris.min.js"></script>
+	<script src="assets/plugins/morris/js/raphael.2.1.0.min.js"></script>
+
+	<!-- Switch -->
+	<script src="assets/plugins/switchery/switchery.min.js"></script>
+	<!--Load these page level functions-->
+
+	<!--查看js-->
+	<script type="text/javascript">
+		function Neo4jLocalList(embedded_neo4j_id) {
+			$.ajax({
+				type : "POST",
+				url : "/Neo4jLocalLook",
+				data : {
+					embedded_neo4j_id : embedded_neo4j_id
+				},
+				dataType : "json",
+				success : function(data) {
+					$("#embedded_neo4j_id").val(data.embedded_neo4j_id);
+					$('#embedded_neo4j_name').val(data.embedded_neo4j_name);
+					$("#embedded_neo4j_path").val(data.embedded_neo4j_path);
+					$("#userName").val(data.userName);
+					$("#embedded_neo4j_createtime").val(
+							data.embedded_neo4j_createtime);
+
+					$('.Neo4jLocal2Look').on('show', function() {
+						$(this).css({
+							'margin-top' : function() {
+								return -($(this).height() / 2);
+							}
+						});
+					});
+					$('#Neo4jLocal2Look').modal('show');
+				}
+			});
+		}
+		function Neo4jList(neo4j_id) {
+			$.ajax({
+				type : "POST",
+				url : "/Neo4jLook",
+				data : {
+					neo4j_id : neo4j_id
+				},
+				dataType : "json",
+				success : function(data) {
+					$("#neo4j_id").val(data.neo4j_id);
+					$('#neo4j_name').val(data.neo4j_name);
+					$("#neo4j_ip").val(data.neo4j_ip);
+					$("#neo4j_port").val(data.neo4j_port);
+					$("#userNameLocal").val(data.userName);
+					$("#neo4j_user").val(data.neo4j_user);
+					$('#neo4j_password').val(data.neo4j_password);
+					$("#neo4j_editon").val(data.neo4j_editon);
+					$("#neo4j_createtime").val(data.neo4j_createtime);
+
+					$('.Neo4j2Look').on('show', function() {
+						$(this).css({
+							'margin-top' : function() {
+								return -($(this).height() / 2);
+							}
+						});
+					});
+					$('#Neo4j2Look').modal('show');
+				}
+			});
+		}
+
+		function GraphXList(graphX_id) {
+			$.ajax({
+				type : "POST",
+				url : "/GraphXLook",
+				data : {
+					graphX_id : graphX_id
+				},
+				dataType : "json",
+				success : function(data) {
+					$("#graphX_id").val(data.graphX_id);
+					$('#graphX_name').val(data.graphX_name);
+					$("#graphX_ip").val(data.graphX_ip);
+					$("#graphX_port").val(data.graphX_port);
+					$("#userNameGraphX").val(data.userName);
+					$("#graphX_version").val(data.graphX_version);
+					$("#graphX_algorithm").val(data.graphX_algorithm);
+					$("#graphX_operation").val(data.graphX_operation);
+					$("#graphX_createtime").val(data.graphX_createtime);
+
+					$('.GraphX2Look').on('show', function() {
+						$(this).css({
+							'margin-top' : function() {
+								return -($(this).height() / 2);
+							}
+						});
+					});
+					$('#GraphX2Look').modal('show');
+				}
+			});
+		}
+	</script>
+
+	<!--删除js-->
+	<script type="text/javascript">
+		function Neo4jDelete(neo4j_id) {
+			$.ajax({
+				type : "POST",
+				url : "/Neo4jDel",
+				data : {
+					neo4j_id : neo4j_id
+				},
+				dataType : "text",
+				success : function(data) {
+					if (data == "1") {
+						window.location.reload();
+					} else {
+						alert("删除失败");
+					}
+				}
+			});
+		}
+		function Neo4jLocalDelete(embedded_neo4j_id) {
+			$.ajax({
+				type : "POST",
+				url : "/Neo4jLocalDel",
+				data : {
+					embedded_neo4j_id : embedded_neo4j_id
+				},
+				dataType : "text",
+				success : function(data) {
+					if (data == "1") {
+						window.location.reload();
+					} else {
+						alert("删除失败");
+					}
+				}
+			});
+		}
+		function GraphXDelete(graphX_id) {
+			$.ajax({
+				type : "POST",
+				url : "/GraphXDel",
+				data : {
+					graphX_id : graphX_id
+				},
+				dataType : "text",
+				success : function(data) {
+					if (data == "1") {
+						window.location.reload();
+					} else {
+						alert("删除失败");
+					}
+				}
+			});
+		}
+	</script>
+
+	<!--修改js-->
+	<script type="text/javascript">
+		function neo4jLocalEdit() {
+			$.ajax({
+				type : "POST",
+				url : "/Neo4jLocalSubmit",
+				data : {
+					embedded_neo4j_id : $("#embedded_neo4j_id").val(),
+					embedded_neo4j_name : $("#embedded_neo4j_name").val(),
+					embedded_neo4j_path : $("#embedded_neo4j_path").val(),
+				},
+				dataType : "text",
+				success : function(data) {
+					if (data == "1") {
+						alert("修改成功");
+
+					} else {
+						alert("修改失败");
+					}
+				}
+			});
+		}
+		function neo4jEdit() {
+			$.ajax({
+				type : "POST",
+				url : "/Neo4jSubmit",
+				data : {
+					neo4j_id : $("#neo4j_id").val(),
+					neo4j_name : $("#neo4j_name").val(),
+					neo4j_ip : $("#neo4j_ip").val(),
+					neo4j_port : $("#neo4j_port").val(),
+					neo4j_user : $("#neo4j_user").val(),
+					neo4j_password : $("#neo4j_password").val(),
+					neo4j_editon : $("#neo4j_editon").val(),
+				},
+				dataType : "text",
+				success : function(data) {
+					if (data == "1") {
+						alert("修改成功");
+
+					} else {
+						alert("修改失败");
+					}
+				}
+			});
+		}
+		function graphXEdit() {
+			$.ajax({
+				type : "POST",
+				url : "/GraphXSubmit",
+				data : {
+					graphX_id : $("#graphX_id").val(),
+					graphX_name : $("#graphX_name").val(),
+					graphX_ip : $("#graphX_ip").val(),
+					graphX_port : $("#graphX_port").val(),
+					graphX_version : $("#graphX_version").val(),
+					graphX_algorithm : $("#graphX_algorithm").val(),
+					graphX_operation : $("#graphX_operation").val(),
+
+				},
+				dataType : "text",
+				success : function(data) {
+					if (data == "1") {
+						alert("修改成功");
+
+					} else {
+						alert("修改失败");
+					}
+				}
+			});
+		}
+	</script>
+
+	<!--添加js-->
+	<script type="text/javascript">
+		function GraphXAdd() {
+			$("#GraphXAddtk").modal("show");
+		}
+		function GraphXAddSubmit() {
+			$.ajax({
+				type : "POST",
+				url : "/GraphXAddSubmitPost",
+				data : {
+					graphX_name : $("#graphX_nameadd").val(),
+					graphX_ip : $("#graphX_ipadd").val(),
+					graphX_port : $("#graphX_portadd").val(),
+					user_Id : $("#user_Idadd").val(),
+					graphX_version : $("#graphX_versionadd").val(),
+					graphX_algorithm : $("#graphX_algorithmadd").val(),
+					graphX_operation : $("#graphX_operationadd").val()
+				},
+				dataType : "text",
+				success : function(data) {
+					if (data == "1") {
+						alert("添加成功");
+						window.location.reload();
+
+					} else {
+						alert("添加失败");
+					}
+				}
+			});
+		}
+
+		function Neo4jAdd() {
+			$("#Neo4jAddtk").modal("show");
+		}
+		function Neo4jAddSubmit() {
+			$.ajax({
+				type : "POST",
+				url : "/Neo4jAddSubmitPost",
+				data : {
+					neo4j_name : $("#neo4j_nameadd").val(),
+					neo4j_ip : $("#neo4j_ipadd").val(),
+					neo4j_port : $("#neo4j_portadd").val(),
+					user_Id : $("#user_IdaddNeo4j").val(),
+					neo4j_user : $("#neo4j_useradd").val(),
+					neo4j_password : $("#neo4j_passwordadd").val(),
+					neo4j_editon : $("#neo4j_editonadd").val()
+				},
+				dataType : "text",
+				success : function(data) {
+					if (data == "1") {
+						alert("添加成功");
+						window.location.reload();
+
+					} else {
+						alert("添加失败");
+					}
+				}
+			});
+		}
+		function Neo4jLocalAddSubmit() {
+			$.ajax({
+				type : "POST",
+				url : "/Neo4jLocalAddSubmitPost",
+				data : {
+					embedded_neo4j_name : $("#embedded_neo4j_nameadd").val(),
+					user_Id : $("#user_IdaddNeo4jLocal").val(),
+					embedded_neo4j_path : $("#embedded_neo4j_pathadd").val(),
+
+				},
+				dataType : "text",
+				success : function(data) {
+					if (data == "1") {
+						alert("添加成功");
+						window.location.reload();
+
+					} else {
+						alert("添加失败");
+					}
+				}
+			});
+		}
+	</script>
+
+	<script type="text/javascript">
+		function showDialog(neo4j) {
+			$("#show_message").html(neo4j);
+
+			$(".test").click(function() {
+				$("#myModal").modal("show");
+			})
+		}
+	</script>
+
+	<script>
+		$(function() {
+			$("[data-toggle='tooltip']").tooltip();
+			$(".dropdown-menu>li:not(#showtable)").on('click', function(e) {
+				e.stopPropagation();
+			});
+
+			$("#clear_input").on('click', function() {
+				$("#all_input").val("");
+			});
+			$("#play")
+					.on(
+							'click',
+							function() {
+								searchByOption();
+								var options = $("#searchKind option:selected");
+								if (options.val() == "cypher") {
+									var input = $("#all_input").val();
+									if (input)
+										$("#show_cypher").html(
+												'$ <a href="javacript:void(0)">'
+														+ input + '</a>');
+								} else {
+									$("#show_cypher").html("");
+								}
+
+								var history = $("#all_input").val();
+								if (history) {
+
+									if ($("#my_history").children().length > 5) {
+										$("#my_history").children().first()
+												.remove();
+									}
+									var insert_history = '<li><a href="javacript:void(0)"> <i class="fa fa-history default-color"></i>'
+											+ history + '</a></li>';
+									$("#my_history").append(insert_history);
+								}
+							});
+			$("#favorite")
+					.on(
+							'click',
+							function() {
+								var options = $("#searchKind option:selected");
+								if (options.val() == "cypher") {
+									var input = $("#all_input").val();
+									if (input) {
+										if ($("#my_save").children().length > 5) {
+											$("#my_save").children().first()
+													.remove();
+										}
+										var save = '<li><a href="#"> <i class="fa fa-bookmark info-color"></i>'
+												+ input + '</a></li>';
+										$("#my_save").append(save);
+									}
+
+								}
+							});
+
+			$("#show_cypher").on('click', function() {
+				$("#all_input").val(($(this).children("a").text()));
+			})
+
+			$("#my_history,#my_save").on('click', 'li a', function() {
+				$("#all_input").val(($(this).text()));
+			})
+
+			$("#show_details").on(
+					'click',
+					function() {
+						$("#show_details i").toggleClass(
+								"fa-angle-double-down fa-angle-double-up");
+					})
+
+			$(".alert-danger .close").on('click', function() {
+				$("#show_errors").parents(".row").hide();
+			})
+
+			$("#center_part .panel-body .tab-content").css("height",
+					($(window).height() - 230) + "px");
+
+			$(window).resize(
+					function() {
+						var height = $(window).height() - 230;
+						$("#center_part .panel-body .tab-content").css(
+								"height", height + "px");
+					});
+
+			if ($("#show_errors").parents(".row").css("display") == "none") {
+			} else {
+			}
+
+			$("#all_results").click(function() {
+				var d = {
+					links : all_links,
+					nodes : all_nodes
+				};
+				update(d);
+				showInfo();
+
+				showTableView(allColumnName, allRowsData);//传列名和每行的数据
+			})
+
+			$("#searchKind")
+					.change(
+							function() {
+								var cur_select = $(
+										"#searchKind option:selected").val();
+								if (cur_select == "all") {
+									var prop_list = [];
+									var temp = null;
+
+									jQuery.ajax({
+										type : 'POST',
+										url : 'getDB_details.do',
+										async : false,
+										dataType : 'json',
+										success : function(data) {
+											temp = data.propertys;
+										},
+										error : function() {
+											console.log("获取节点、关系、属性信息失败");
+										}
+									});
+
+									var insertOption = "<option selected disabled>--请选择属性值--</option>"
+
+									for ( var i in temp) {
+										var t = temp[i];
+										insertOption += '<option value="'+t.prop+'">'
+												+ t.prop + '<option>';
+									}
+
+									$("#select_prop").show();
+									$("#all_input").css("width", "80%");
+
+									$("#select_prop").html(insertOption);
+
+									$("#select_prop").children("option").each(
+											function() {
+
+												if (this.text == "") {
+													this.remove();
+												}
+											})
+
+								} else {
+									$("#select_prop").hide();
+									$("#all_input").css("width", "90%");
+
+								}
+
+							})
+
+			function toggleSidebar(side) {
+				if (side !== "left" && side !== "right") {
+					return false;
+				}
+				var left = $("#left_part"), right = $("#right_part"), content = $("#center_part"), openSidebarsCount = 0, contentClass = "";
+
+				if (side === "left") {
+					left.toggleClass("col-md-0");
+				} else if (side === "right") {
+					right.toggleClass("col-md-0");
+				}
+
+				if (!left.hasClass("col-md-0")) {
+					openSidebarsCount += 1;
+				}
+
+				if (!right.hasClass("col-md-0")) {
+					openSidebarsCount += 1;
+				}
+
+				if (openSidebarsCount === 0) {
+					contentClass = "col-md-12 col-lg-12";
+				} else if (openSidebarsCount === 1) {
+					contentClass = "col-md-10 col-lg-10";
+				} else {
+					contentClass = "col-md-8 col-lg-8";
+				}
+
+				content
+						.removeClass(
+								"col-md-8 col-md-10 col-md-12 col-lg-8 col-lg-10 col-lg-12")
+						.addClass(contentClass);
+			}
+
+			$(".actions .fa-list-ol,#right_part .fa-times-circle").on('click',
+					function() {
+						toggleSidebar("right");
+					})
+			$(".actions .fa-code-fork,#left_part .fa-times-circle,#show_save")
+					.on('click', function() {
+						toggleSidebar("left");
+					})
+
+		});
+	</script>
+</body>
+
+</html>

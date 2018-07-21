@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>GraphHub</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- DataTables-->
+    <link rel="stylesheet" href="assets/plugins/dataTables/css/dataTables.css">
+    <link rel="stylesheet" type="text/css" href="table/css/dataTables.bootstrap.css"> 
+    <!-- Fonts  -->
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/simple-line-icons.css">
+    <!-- CSS Animate -->
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <!--Page Level CSS-->
+    <link rel="stylesheet" href="assets/plugins/icheck/css/all.css">
+    <!-- Switchery -->
+    <link rel="stylesheet" href="assets/plugins/switchery/switchery.min.css">
+    <!-- Custom styles for this theme -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Feature detection -->
+    <script src="assets/js/vendor/modernizr-2.6.2.min.js"></script>
+
+    <style type="text/css">
+        .col-md-0{
+            display: none;
+        }
+	  	.node { stroke: #222; stroke-width: 1.5px; }
+
+	    .link { stroke: #999; stroke-opacity: .6; /*stroke-width: 1; IE 浏览器爆炸*/fill:none;}
+
+		.text{fill:black;font-size:8px;"text-anchor":"middle";}
+		.arc{fill:#d2d5da;}
+		.link.shadow:hover{opacity:1;stroke:#87D489;}
+		.main-content-wrapper #main-content {
+		    padding: 0 15px 0 15px;
+		    width: 100%;
+		}
+		.myform{
+			width: 100%;
+		    padding-left: 5px;
+		    padding-right: 5px;
+		    padding-top: 0;
+		    padding-bottom: 5px;
+		}
+		.col-md-2,.col-md-8,.col-md-10,.col-md-12{
+			padding-left: 5px;
+		    padding-right: 5px;
+		}
+		#center_part .panel-body .tab-wrapper{
+			margin-bottom:0;
+		}
+		#center_part .panel-body .tab-content{
+			/* height:800px; */
+			/* overflow-y:hidden; */
+		}
+		.isClicked{
+			background: #717172;
+		}
+		.modal-dialog1 {  margin: 20% 50%;  } 
+		.table tbody tr td{
+			/* table-layout:fixed; *//*表格宽度固定*/
+			word-wrap: break-word;/*换行*/
+			word-break:break-all;/*换行*/
+			text-align:center;/*文字水平居中*/
+            vertical-align: middle;/*垂直居中*/
+        }
+        .form-control{
+        	border: 2px solid black;
+        }
+        
+        ::selection {
+			background:#6C6;
+			color:#fff;
+		}
+		table pre{
+			background-color:transparent;
+			border: 0px solid #ccc;
+		}
+		#nodeInfo,#nodeSize{
+			text-transform:none;
+		}
+		
+    </style>
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/vendor/html5shiv.js"></script>
+    <script src="assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+     <section id="main-wrapper" class="theme-green-full">
+    	<header id="header">
+        	<ul class="nav navbar-nav navbar-left">
+                <li class="toggle-navigation toggle-left">
+                    <button class="sidebar-toggle" id="toggle-left">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </li>
+                
+            </ul>
+            <!--logo start-->
+            <div class="brand col-md-6 col-md-offset-5">
+                <a href="new_index.html" class="logo" style="text-transform:capitalize;">
+                    <i class="icon-layers"></i>
+                    Graphub</a>
+            </div>
+            <!--logo end-->
+           
+            <ul class="nav navbar-nav navbar-right">
+            	<li class="toggle-profile hidden-xs">
+                    <button type="button" class="btn btn-default" id="toggle-profile">
+                        <i class="icon-user"></i>
+                    </button>
+                </li>
+                
+                 <li class="toggle-fullscreen hidden-xs">
+                    <button type="button" class="btn btn-default expand" id="toggle-fullscreen">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                </li>
+                
+            </ul>
+        </header>
+        <!--sidebar left start-->
+        <aside class="sidebar sidebar-left">
+
+            <nav style="margin-top: 10px;">
+               <!--  <h5 class="sidebar-header">导航栏</h5> -->
+                <ul class="nav nav-pills nav-stacked">
+                    <li class=" nav-dropdown">
+                        <a href="new_index.html" title="HomePage">
+                            <i class="fa  fa-fw fa-tachometer"></i> 主页
+                        </a>
+                    </li>
+                    <li class="nav-dropdown">
+                        <a href="LoadData.html" title="ETL">
+                            <i class="fa  fa-fw fa-cogs"></i> 数据导入
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="GraphBrowse.html" title="GraphBrowse">
+                            <i class="fa  fa-fw fa-th-list"></i> 图谱浏览
+                        </a>
+                    </li>
+                    <li class="nav-dropdown">
+                        <a href="#" title="AnalyticModel">
+                            <i class="fa fa-fw fa-bar-chart-o"></i> 分析模型
+                        </a>
+                        <ul class="nav-sub">
+                            <li>
+                                <a href="QueryModel.html" title="QueryModel">
+                                    查询模型
+                                </a>
+                            </li>
+                            <li>
+                                <a href="TraversalModel.html" title="TraversalModel">
+                                     遍历模型
+                                </a>
+                            </li>
+                            <li>
+                                <a href="StatisticsModel.html" title="StatisticsModel">
+                                     统计模型
+                                </a>
+                            </li>
+                            <li>
+                                <a href="LearnModel.html" title="LearnModel">
+                                     学习模型
+                                </a>
+                            </li>
+                            <li>
+                                <a href="MiningModel.html" title="MiningModel">
+                                     挖掘模型
+                                </a>
+                            </li>
+                        </ul>
+                    </li> 
+                    <li class="nav-dropdown">
+                        <a href="GraphHubManager" title="GraphEdit">
+                            <i class="fa  fa-fw fa-edit"></i> 平台管理
+                        </a>
+                        <ul class="nav-sub">
+                            <li>
+                                <a href="#" title="Schema Edit">
+                                    模式修改
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="Graph Edit">
+                                     图谱修改
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                 
+                    
+                </ul>
+            </nav>
+            
+        </aside>
+        <!--sidebar left end-->
+        
+        <!--main content start-->
+        <section class="main-content-wrapper">
+
+            <section id="main-content" class="animated fadeInUp">
+            	<div class="row">
+            		<!-- <div class="panel">
+	            		<div class="panel-body"> -->
+		            		<form role="search" class="myform" id="" style="width:100%">
+			            		<div class="input-group input-group-lg">
+			                		<select class="form-control" style="width:10%;font-size:14px" id="searchKind">
+										<option value="cypher">Cypher查询</option>
+										<option value="all">全局查询</option>
+										<option value="part">当前页面查询</option>
+									</select>
+									<select class="form-control" style="width:10%;font-size:14px;display:none" id="select_prop">
+										
+									</select>
+									<input type="text"  placeholder="" class="form-control" id="all_input" style="width:90%">
+			                		<span class="input-group-btn">
+			                    		<button class="btn btn-default" type="button" id="favorite"><i class="fa fa-star-o"></i></button>
+			                    		<button class="btn btn-default" type="button" id="clear_input"><i class="fa fa-times"></i></button>
+			                    		<button class="btn btn-default" type="button" id="play" onclick="exit()"><i class="fa fa-play-circle"></i></button>
+			                    	</span>
+			                    </div>
+				            </form>   
+			            <!-- </div>
+			    	 </div>  --> 
+            	</div>
+                <div class="row" style="display:none">
+                	<div class="alert alert-danger alert-dismissable">
+						<button type="button" class="close">
+							&times;
+						</button>
+						<div id="show_errors"></div>
+					</div>
+                </div>
+                <div class="row">
+                    <div id="left_part" class="col-md-2 col-sm-12 col-xs-12 col-lg-2 animated fadeInUp" >
+                         <aside class="panel">
+                         	<div class="panel-heading">
+                                <h3 class="panel-title">收藏与历史</h3>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-expand"></i>
+                                    <i class="fa fa-chevron-down"></i>
+                                    <i class="fa fa-times-circle"></i>
+                                </div>
+                            </div>
+                             <aside class="panel-body">
+                                <button class="btn btn-info btn-block">我的收藏</button>
+                                <ul id="my_save" class="nav nav-pills nav-stacked compose-nav" style="height:350px;overflow-y:auto">
+                                    <!--    	<a href="#"> <i class="fa fa-bookmark info-color"></i></a></li> -->
+                                </ul>
+                                <button class="btn btn-default btn-block">历史记录</button>
+                                <ul id="my_history" class="nav nav-pills nav-stacked compose-nav" style="height:350px;overflow-y:auto">
+                                    <!-- <li> <a href="javacript:void(0)"> <i class="fa fa-history default-color"></i>12355855</a></li> -->
+                                </ul>
+                            </aside>
+                         </aside>
+                     
+                     </div> 
+                    <div id="center_part" class="col-md-8 col-sm-12 col-xs-12 col-lg-8 animated fadeInUp">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="padding-bottom: 0;padding-left: 15px;height: 45px">
+                            	<span data-toggle="tooltip" data-placement="right" id="show_save" title="收藏与历史" style="display:inline;cursor: pointer"><i class="fa fa-star"></i></span>
+                                <div id="show_cypher" style="display:inline;padding-left:60px"></div>
+                                <div class="actions pull-right" style="top:20px">
+                                    
+                                    <li data-toggle="tooltip" data-placement="top" id="shaixuanbtn" title="关系筛选" style="display:inline;margin-left: 20px;">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-filter"></i></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li name="realtion">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="DB" checked onclick="showlinetext(this)" >&nbsp;&nbsp;&nbsp;担保</li>
+                                            <li class="divider" name="realtion"></li>
+                                            <li name="realtion">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="JY" checked onclick="showlinetext(this)" >&nbsp;&nbsp;&nbsp;交易</li>
+                                            <li class="divider" name="realtion"></li>
+                                            <li name="realtion">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="DK" checked onclick="showlinetext(this)" >&nbsp;&nbsp;&nbsp;贷款</li>
+                                            <li class="divider" name="realtion"></li>
+                                            <li name="realtion">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="DY" checked onclick="showlinetext(this)" >&nbsp;&nbsp;&nbsp;对应账户</li>
+                                            <li class="divider" name="realtion"></li>
+                                            <li name="realtion">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="ZDB" checked onclick="showlinetext(this)" >&nbsp;&nbsp;&nbsp;总担保</li>
+                                            <li class="divider" name="realtion"></li>
+                                            <li name="realtion">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="GL" checked onclick="showlinetext(this)" >&nbsp;&nbsp;&nbsp;关联</li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <li id="nodeshaixuanbtn" title="节点筛选" style="display:inline;margin-left: 20px;">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li name="node">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="B" checked onclick="showdottext(this)" >&nbsp;&nbsp;&nbsp;银行</li>
+                                            <li class="divider" name="node"></li>
+                                            <li name="node">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="P" checked onclick="showdottext(this)" >&nbsp;&nbsp;&nbsp;个人</li>
+                                            <li class="divider" name="node"></li>
+                                            <li name="node">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="C" checked onclick="showdottext(this)" >&nbsp;&nbsp;&nbsp;对公</li>
+                                            <li class="divider" name="node"></li>
+                                            <li name="node">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="ComPer" checked onclick="showdottext(this)" >&nbsp;&nbsp;&nbsp;账户</li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="dropdown" data-toggle="tooltip" data-placement="top" title="导出" style="display:inline;margin-left: 20px;">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-download"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li id="showtable"><a href="#"  data-toggle="modal" data-target="#tableModal" onclick="showTable(1)">导出表格</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#" onclick="downloadimg()">导出图片</a></li>
+                                        </ul> 
+                                    </li>
+                                    <li class="dropdown" data-toggle="tooltip" data-placement="top" title="更多" style="display:inline;margin-left: 20px;">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa  fa-ellipsis-h"></i></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="more[]" value="checkbox" onclick="showNodetext(this)" checked id="shownode">&nbsp;&nbsp;&nbsp;显示客户名称</li>
+                                            <li class="divider"></li>
+                                            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="more[]" value="checkbox" onclick="showLinktext(this)" checked id="showlink">&nbsp;&nbsp;&nbsp;显示关系名称</li>
+                                        </ul>
+                                    </li>
+                                    <li data-toggle="tooltip" data-placement="top" title="固定" id="resetbtn" style="display:inline;margin-left: 20px;"><i class="icon-pin"></i></li>
+                                    <li data-toggle="tooltip" data-placement="top" title="列表查看" style="display:inline;margin-left: 20px;"><i class="fa fa-list-ol"></i></li>
+                                    <li data-toggle="tooltip" data-placement="top" title="全屏" style="display:inline;margin-left: 20px;"><i class="fa fa-expand"></i></li>
+                                    <li data-toggle="tooltip" data-placement="left" title="折叠" style="display:inline;margin-left: 20px;"><i class="fa fa-chevron-down"></i></li>
+                                </div>
+                            </div>
+                            <div class="panel-body" >
+                                <div class="tab-wrapper tab-left">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#graph" data-toggle="tab" title="图视图"><i class="fa fa-globe"></i></a>
+                                        </li>
+                                        <li><a href="#tableView1" data-toggle="tab" title="表视图"><i class="fa fa-table"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="graph">
+
+                                        </div>
+                                        <div class="tab-pane table-responsive" id="tableView1">
+                                            <table id="table_view" class="table table-striped table-bordered table-hover table-condensed" >
+                                        	</table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-footer" >
+                            	<div id="nodeSize" style="padding-left:90px;word-wrap:break-word"></div>
+                            	<div style="text-align:right"><a title="详细信息" data-toggle="collapse" href="#detail_collapsed" class="collapsed" id="show_details"><i class="fa fa-angle-double-down"></i></a></div>
+                            	<div class="panel panel-default panel-collapse collapse" id="detail_collapsed">
+                            		<div class="panel-body">
+                            			<table class="table table-striped table-hover table-bordered" style="table-layout:fixed">
+											<tbody id="nodeInfo">
+											</tbody>
+										</table>
+                                    </div>
+                            	</div>
+                            </div>
+                        </div>
+                    </div>
+              		<div id="right_part" class="col-md-2 col-sm-12 col-xs-12 col-lg-2 animated fadeInUp">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">结果列表</h3>
+                                <div class="actions pull-left">
+                                    <i class="fa fa-times-circle"></i>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                            	
+                            	<button class="btn btn-info btn-block" id="all_results" style="display:none">全部结果</button>
+                            	
+	                            <table id="list_view_table" class="table table-striped table-hover " style="table-layout:fixed">
+									<tbody>
+									</tbody>
+								</table> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <!--main content end-->
+    </section>
+    
+    <!-- 加载中 -->
+	<div class="modal fade" id="showloding" style="overflow:hidden">  
+	  <div class="modal-dialog1 modal-sm"> 
+	  <div><img src="image/loding.gif"><label>加载中，请稍侯。。。</label></div> 
+	  </div><!-- /.modal-dialog -->  
+	</div><!-- /.modal -->
+	
+	<!-- 交易数据表格 -->
+	<div class="modal fade" id="tableModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog"  style="width:100%;height:100%">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title">
+						表格
+					</h4>
+				</div>
+				<div class="modal-body">
+					 <table id="results" class="table table-striped table-hover table-bordered" style="width:100%">
+	   					 <caption class="text-center"></caption>
+	   					 <thead>
+	   							 <tr><th class="text-center">序号</th><th class="text-center">交易机构名称</th><th class="text-center">交易账号</th><th class="text-center">交易户名</th><th class="text-center">银行机构代码</th><th class="text-center">对方机构名称</th><th class="text-center">对方户名</th><th class="text-center">交易金额</th><th class="text-center">交易日期</th><th class="text-center">账户余额</th></tr>
+	   					 </thead>
+	    				 <tbody>
+	    				 </tbody>
+	   				 </table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+					</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+    
+    <!--Config demo-->
+     <a href="javascript:void(0)" class="config-link closed"><i class="icon-settings"></i></a>
+     <div id="config" class="config hidden-xs">
+        <h4>Settings<a href="javascript:void(0)" class="config-link closed"><i class="icon-settings"></i></a></h4>
+        <div class="config-swatch-wrap">
+            <div class="row">
+                <div class="col-xs-6">
+                    <ul class="options">
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-default">
+                                <span class="header bg-white"></span>
+                                <span class="header bg-white"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-dark">
+                                <span class="header bg-dark"></span>
+                                <span class="header bg-white"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-blue">
+                                <span class="header bg-info"></span>
+                                <span class="header bg-white"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-blue-full">
+                                <span class="header bg-info"></span>
+                                <span class="header bg-info"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-grey">
+                                <span class="header bg-grey"></span>
+                                <span class="header bg-white"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-grey-full">
+                                <span class="header bg-grey"></span>
+                                <span class="header bg-grey"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-xs-6">
+                    <ul class="options">
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-dark-full">
+                                <span class="header bg-dark"></span>
+                                <span class="header bg-dark"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-green">
+                                <span class="header bg-green"></span>
+                                <span class="header bg-white"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-green-full">
+                                <span class="header bg-green"></span>
+                                <span class="header bg-green"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-red">
+                                <span class="header bg-red"></span>
+                                <span class="header bg-white"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-red-full">
+                                <span class="header bg-red"></span>
+                                <span class="header bg-red"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-dark-blue-full">
+                                <span class="header bg-dark-blue"></span>
+                                <span class="header bg-dark-blue"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <!--/Config demo-->
+    <!--Global JS-->
+    <script src="assets/js/vendor/jquery-1.11.1.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/navgoco/jquery.navgoco.min.js"></script>
+    <script src="assets/plugins/pace/pace.min.js"></script>
+    <script src="assets/plugins/fullscreen/jquery.fullscreen-min.js"></script>
+    <script src="assets/js/src/app.js"></script>
+    
+     <!--  -->
+    <script type="text/javascript" src="laydate/laydate.js"></script>
+	<script type="text/javascript" src="javascripts/d3.js"></script>
+	<script type="text/javascript" src="javascripts/wy.js"></script>
+	<script type="text/javascript" src="javascripts/dx.js"></script>
+	<script type="text/javascript" src="javascripts/srf.js"></script>
+	<script type="text/javascript" src="javascripts/util.js"></script>
+	<script type="text/javascript" src="javascripts/savePNG.js"></script>
+	
+	<!-- <script src="assets/plugins/dataTables/js/jquery.dataTables.js"></script>
+    <script src="assets/plugins/dataTables/js/dataTables.bootstrap.js"></script> -->
+	
+	<script type="text/javascript" src="table/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" src="table/js/dataTables.bootstrap.js"></script>
+	<script type="text/javascript" src="table/js/dataTables.buttons.js"></script>
+	<script type="text/javascript" src="table/js/buttons.bootstrap.js"></script>
+	<script type="text/javascript" src="table/js/jszip.js"></script>
+	<script type="text/javascript" src="table/js/buttons.html5.js"></script> 
+    
+    
+    <!--Page Level JS-->
+    <script src="assets/plugins/countTo/jquery.countTo.js"></script>
+    <script src="assets/plugins/weather/js/skycons.js"></script>
+    <script src="assets/plugins/daterangepicker/moment.min.js"></script>
+    <script src="assets/plugins/daterangepicker/daterangepicker.js"></script>
+
+    <!-- Morris  -->
+    <script src="assets/plugins/morris/js/morris.min.js"></script>
+    <script src="assets/plugins/morris/js/raphael.2.1.0.min.js"></script>
+    
+    <!-- Switch -->
+    <script src="assets/plugins/switchery/switchery.min.js"></script>
+    <!--Load these page level functions-->
+    <script>
+
+    $(function () { 
+        $("[data-toggle='tooltip']").tooltip(); 
+        $(".dropdown-menu>li:not(#showtable)").on('click', function (e) {
+                e.stopPropagation();
+        }); 
+
+        $("#clear_input").on('click', function () {
+        	$("#all_input").val("");
+    	});
+        $("#play").on('click', function () {
+        	searchByOption();
+        	var options = $("#searchKind option:selected");
+        	if(options.val()=="cypher"){
+        		var input = $("#all_input").val();
+        		if(input)
+        			$("#show_cypher").html('$ <a href="javacript:void(0)">'+input+'</a>');
+        	}else{
+        		$("#show_cypher").html("");
+        	}
+        	
+        	var history = $("#all_input").val();
+        	if(history){
+        		
+       			if($("#my_history").children().length>5){
+       				$("#my_history").children().first().remove();
+       			}
+       			var insert_history = '<li><a href="javacript:void(0)"> <i class="fa fa-history default-color"></i>'+history+'</a></li>';
+        		$("#my_history").append(insert_history);
+        	}
+    	});
+		$("#favorite").on('click', function () {
+			var options = $("#searchKind option:selected");
+        	if(options.val()=="cypher"){
+        		var input = $("#all_input").val();
+        		if(input){
+        			if($("#my_save").children().length>5){
+        				$("#my_save").children().first().remove();
+        			}
+        			var save = '<li><a href="#"> <i class="fa fa-bookmark info-color"></i>'+input+'</a></li>';
+        			$("#my_save").append(save);
+        		}
+        		
+        	}
+    	});
+		
+		$("#show_cypher").on('click',function(){
+			$("#all_input").val(($(this).children("a").text()));
+		})
+		
+		$("#my_history,#my_save").on('click','li a',function(){
+			$("#all_input").val(($(this).text()));
+		})
+		
+		$("#show_details").on('click',function(){
+				$("#show_details i").toggleClass("fa-angle-double-down fa-angle-double-up");
+		})
+		
+		$(".alert-danger .close").on('click',function(){
+			$("#show_errors").parents(".row").hide();
+		})
+		
+		$("#center_part .panel-body .tab-content").css("height",($(window).height()-230)+"px");
+		
+		$(window).resize(function() {
+			var height = $(window).height()-230;
+			$("#center_part .panel-body .tab-content").css("height",height+"px");
+		});
+		
+		if($("#show_errors").parents(".row").css("display")=="none"){
+		}else{
+		}
+		
+		$("#all_results").click(function(){
+		   var d = {links:all_links,nodes:all_nodes};
+		   console.log("全部数据：\n",d);
+		   layout.update(d);
+		   showInfo();
+		   
+		   showTableView(allColumnName,allRowsData);//传列名和每行的数据
+		})
+		
+		$("#searchKind").change(function(){
+			var cur_select = $("#searchKind option:selected").val();
+			if(cur_select=="all"){
+				var prop_list = [];
+				var temp=null;
+				
+				jQuery.ajax({
+					type: 'POST',
+					url: 'getDB_details.do',
+					async: false,
+					dataType: 'json',
+					success: function(data){
+						temp=data.propertys;
+					},
+					error: function(){
+						console.log("获取节点、关系、属性信息失败");
+					}
+				});
+				
+				var insertOption = "<option selected disabled>--请选择属性值--</option>"
+				
+				for(var i in temp){
+					var t = temp[i];
+					insertOption += '<option value="'+t.prop+'">'+t.prop+'<option>';
+				}
+				
+				
+				$("#select_prop").show();
+				$("#all_input").css("width","80%");
+				
+				
+				$("#select_prop").html(insertOption);
+				
+				$("#select_prop").children("option").each(function(){
+					
+					if(this.text==""){
+						this.remove();
+					}
+				})
+				
+			}else{
+				$("#select_prop").hide();
+				$("#all_input").css("width","90%");
+				
+			}
+			
+			
+		})
+		
+		function toggleSidebar(side) {
+			if (side !== "left" && side !== "right") {
+				return false;
+			}
+			var left = $("#left_part"),
+				right = $("#right_part"),
+				content = $("#center_part"),
+				openSidebarsCount = 0,
+				contentClass = "";
+			
+			if (side === "left") {
+				left.toggleClass("col-md-0");
+			} else if (side === "right") {
+				right.toggleClass("col-md-0");
+			}
+			
+			if (!left.hasClass("col-md-0")) {
+				openSidebarsCount += 1;
+			}
+			
+			if (!right.hasClass("col-md-0")) {
+				openSidebarsCount += 1;
+			}
+			
+			if (openSidebarsCount === 0) {
+				contentClass = "col-md-12 col-lg-12";
+			} else if (openSidebarsCount === 1) {
+				contentClass = "col-md-10 col-lg-10";
+			} else {
+				contentClass = "col-md-8 col-lg-8";
+			}
+			
+			content.removeClass("col-md-8 col-md-10 col-md-12 col-lg-8 col-lg-10 col-lg-12")
+				   .addClass(contentClass);
+		} 
+        
+        $(".actions .fa-list-ol,#right_part .fa-times-circle").on('click',function(){
+        	toggleSidebar("right");
+        })
+        $(".actions .fa-code-fork,#left_part .fa-times-circle,#show_save").on('click',function(){
+            toggleSidebar("left");
+        })
+        
+
+    });
+
+
+    </script>
+</body>
+
+</html>

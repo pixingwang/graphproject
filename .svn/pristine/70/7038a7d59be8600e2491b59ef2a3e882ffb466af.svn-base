@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>GraphHub</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <!-- Fonts  -->
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/simple-line-icons.css">
+    <!-- CSS Animate -->
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <!--Page Level CSS-->
+    <link rel="stylesheet" href="assets/plugins/icheck/css/all.css">
+    <!-- Switchery -->
+    <link rel="stylesheet" href="assets/plugins/switchery/switchery.min.css">
+    <!-- Custom styles for this theme -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- Feature detection -->
+    <script src="assets/js/vendor/modernizr-2.6.2.min.js"></script>
+
+    <style type="text/css">
+        .col-md-0{
+            display: none;
+        }
+    </style>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/vendor/html5shiv.js"></script>
+    <script src="assets/js/vendor/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <section id="main-wrapper" class="theme-green-full">
+        <header id="header">
+         <ul class="nav navbar-nav navbar-left">
+                <li class="toggle-navigation toggle-left">
+                    <button class="sidebar-toggle" id="toggle-left">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                </li>
+                
+            </ul>
+            <!--logo start-->
+            <div class="brand col-md-6 col-md-offset-5">
+                <a href="new_index.html" class="logo" style="text-transform:capitalize;">
+                    <i class="icon-layers"></i>
+                    Graphub</a>
+            </div>
+            <!--logo end-->
+           
+            <ul class="nav navbar-nav navbar-right">
+            	<li class="toggle-profile hidden-xs">
+                    <button type="button" class="btn btn-default" id="toggle-profile">
+                        <i class="icon-user"></i>
+                    </button>
+                </li>
+                
+                 <li class="toggle-fullscreen hidden-xs">
+                    <button type="button" class="btn btn-default expand" id="toggle-fullscreen">
+                        <i class="fa fa-expand"></i>
+                    </button>
+                </li>
+                
+            </ul>
+        </header>
+        <!--sidebar left start-->
+        <aside class="sidebar sidebar-left">
+            <div class="sidebar-profile">
+                <div class="avatar">
+                    <img class="img-circle profile-image" src="assets/img/profile.jpg" alt="profile">
+                    <i class="on border-dark animated bounceIn"></i>
+                </div>
+                <div class="profile-body dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><h4>Admin<span class="caret"></span></h4></a>
+                    <ul class="dropdown-menu animated fadeInRight" role="menu">
+                        <li class="profile-progress">
+                            <h5>
+                                <span>80%</span>
+                                <small>Profile complete</small>
+                            </h5>
+                            <div class="progress progress-xs">
+                                <div class="progress-bar progress-bar-primary" style="width: 80%">
+                                </div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <span class="icon"><i class="fa fa-user"></i>
+                                </span>My Account</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <span class="icon"><i class="fa fa-envelope"></i>
+                                </span>Messages</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <span class="icon"><i class="fa fa-cog"></i>
+                                </span>Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="javascript:void(0);">
+                                <span class="icon"><i class="fa fa-sign-out"></i>
+                                </span>Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <nav>
+                <h5 class="sidebar-header">导航栏</h5>
+                <ul class="nav nav-pills nav-stacked">
+                    <li>
+                        <a href="new_index.html" title="HomePage">
+                            <i class="fa  fa-fw fa-tachometer"></i> 主页
+                        </a>
+                    </li>
+                    <li class="nav-dropdown">
+                        <a href="#" title="ETL">
+                            <i class="fa  fa-fw fa-cogs"></i> 数据导入
+                        </a>
+                    </li>
+                    <li class="nav-dropdown">
+                        <a href="GraphBrowse.html" title="GraphBrowse">
+                            <i class="fa  fa-fw fa-th-list"></i> 图谱浏览
+                        </a>
+                    </li>
+                    <li class="nav-dropdown active">
+                        <a href="#" title="AnalyticModel">
+                            <i class="fa fa-fw fa-bar-chart-o"></i> 分析模型
+                        </a>
+                        <ul class="nav-sub">
+                            <li>
+                                <a href="QueryModel.html" title="QueryModel">
+                                    查询模型
+                                </a>
+                            </li>
+                            <li>
+                                <a href="TraversalModel.html" title="TraversalModel">
+                                     遍历模型
+                                </a>
+                            </li>
+                            <li>
+                                <a href="StatisticsModel.html" title="StatisticsModel">
+                                     统计模型
+                                </a>
+                            </li>
+                            <li>
+                                <a href="LearnModel.html" title="LearnModel">
+                                     学习模型
+                                </a>
+                            </li>
+                            <li>
+                                <a href="MiningModel.html" title="MiningModel">
+                                     挖掘模型
+                                </a>
+                            </li>
+                        </ul>
+                    </li> 
+                    <li class="nav-dropdown">
+                        <a href="#" title="GraphEdit">
+                            <i class="fa  fa-fw fa-edit"></i> 平台管理
+                        </a>
+                        <ul class="nav-sub">
+                            <li>
+                                <a href="#" title="Schema Edit">
+                                    模式修改
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" title="Graph Edit">
+                                     图谱修改
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                 
+                    
+                </ul>
+            </nav>
+            
+        </aside>
+
+        <!--sidebar left end-->
+        <!--main content start-->
+        <section class="main-content-wrapper">
+            <div class="pageheader">
+                <h1>分析模型</h1>
+                <div class="breadcrumb-wrapper hidden-xs">
+                    <span class="label">当前位置:</span>
+                    <ol class="breadcrumb">
+                        <li><a href="index.html">主页</a></li>
+                        <li>分析模型</li>
+                        <li class="active">挖掘模型</li>
+                    </ol>
+                </div>
+            </div>
+            <section id="main-content" class="animated fadeInUp">
+                <div class="row">
+                    <div id="model_choice_panel" class="col-md-2 col-sm-2" >
+                         <div class="panel">
+                             <aside class="panel-body">
+                                
+                                <button id = "hide_mining_model_select" class="btn btn-default" style="float: right; "><i class="icon-logout"></i></button>
+                                <div class="form-group" style="margin:0px;">
+                                    <select id = "mining_model_select" class="form-control " style="width: 100%;height: 45px" onchange="mining_model()">
+                                          <option selected disabled >请选择挖掘模型</option>
+                                          <option id="bqcb">标签传播</option>
+                                    </select>
+                                </div> 
+                             </aside>
+                         </div>
+                     
+                         <div id ="bqcb_panel" style="display:none;" class="panel">
+                             <aside class="panel-body">
+                                 <div class="panel-body">
+                                     <div class="form-group">
+                                         <input type="text" class="form-control" placeholder="迭代次数" name="">
+                                     </div>
+                                     <div  class="form-group">
+                                         <label>
+                                             <input id = "use_label_stack_check" type="checkbox" name="">使用标签栈
+                                         </label>
+                                        <div id = "use_label_stack" style="display: none;" class="form-inline">r=<input type="text" style="width: 70%" /></div>
+                                    </div>
+                                    
+                                 </div>
+                             </aside>
+                         </div>
+                     </div> 
+                    <div id="model_show_panel" class="col-md-10 col-sm-10">
+
+                        <div class="panel panel-default col-md-10 col-sm-10 mainView animated fadeInUp">
+                            <div class="panel-heading" style="padding-bottom: 0;padding-left: 15px;height: 45px">
+                                <div id = "show_mining_model_select_div" style="display: none;top:20px"><button id = "show_mining_model_select" class="btn btn-default" style="float: left; "><i class="icon-login"></i></button></div>
+                                <div class="actions pull-right" style="top:20px">
+                                    
+                                    <li data-toggle="tooltip" data-placement="top" title="关系筛选" style="display:inline;margin-left: 20px;">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-filter"></i></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li name="realtion">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="DB" checked onclick="showlinetext(this)" >&nbsp;&nbsp;&nbsp;担保</li>
+                                            <li class="divider" name="realtion"></li>
+                                            <li name="realtion">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="JY" checked onclick="showlinetext(this)" >&nbsp;&nbsp;&nbsp;交易</li>
+                                            <li class="divider" name="realtion"></li>
+                                            <li name="realtion">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="DK" checked onclick="showlinetext(this)" >&nbsp;&nbsp;&nbsp;贷款</li>
+                                            <li class="divider" name="realtion"></li>
+                                            <li name="realtion">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="DY" checked onclick="showlinetext(this)" >&nbsp;&nbsp;&nbsp;对应账户</li>
+                                            <li class="divider" name="realtion"></li>
+                                            <li name="realtion">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="ZDB" checked onclick="showlinetext(this)" >&nbsp;&nbsp;&nbsp;总担保</li>
+                                            <li class="divider" name="realtion"></li>
+                                            <li name="realtion">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="GL" checked onclick="showlinetext(this)" >&nbsp;&nbsp;&nbsp;关联</li>
+                                        </ul>
+                                    </li>
+                                    <li data-toggle="tooltip" data-placement="top" title="节点筛选" style="display:inline;margin-left: 20px;">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-globe"></i></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li name="node">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="B" checked onclick="showdottext(this)" >&nbsp;&nbsp;&nbsp;银行</li>
+                                            <li class="divider" name="node"></li>
+                                            <li name="node">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="P" checked onclick="showdottext(this)" >&nbsp;&nbsp;&nbsp;个人</li>
+                                            <li class="divider" name="node"></li>
+                                            <li name="node">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="C" checked onclick="showdottext(this)" >&nbsp;&nbsp;&nbsp;对公</li>
+                                            <li class="divider" name="node"></li>
+                                            <li name="node">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="relation[]" value="ComPer" checked onclick="showdottext(this)" >&nbsp;&nbsp;&nbsp;账户</li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="dropdown" data-toggle="tooltip" data-placement="top" title="导出" style="display:inline;margin-left: 20px;">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-download"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#" onclick="fun()">导出表格</a></li>
+                                            <li class="divider"></li>
+                                            <li><a href="#">导出图片</a></li>
+                                        </ul> 
+                                    </li>
+                                    <li class="dropdown" data-toggle="tooltip" data-placement="top" title="更多" style="display:inline;margin-left: 20px;">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa  fa-ellipsis-h"></i></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="more[]" value="checkbox" onclick="showNodetext(this)" checked id="shownode">&nbsp;&nbsp;&nbsp;显示客户名称</li>
+                                            <li class="divider"></li>
+                                            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="more[]" value="checkbox" onclick="showLinktext(this)" checked id="showlink">&nbsp;&nbsp;&nbsp;显示关系名称</li>
+                                        </ul>
+                                    </li>
+                                    <li data-toggle="tooltip" data-placement="top" title="固定" style="display:inline;margin-left: 20px;"><i class="fa fa-thumb-tack"></i></li>
+                                    <li data-toggle="tooltip" data-placement="top" title="列表查看" style="display:inline;margin-left: 20px;"><i class="fa fa-list-ol"></i></li>
+                                    <li data-toggle="tooltip" data-placement="top" title="全屏" style="display:inline;margin-left: 20px;"><i class="fa fa-expand"></i></li>
+                                    <li data-toggle="tooltip" data-placement="top" title="折叠" style="display:inline;margin-left: 20px;"><i class="fa fa-chevron-down"></i></li>
+                                    <!-- <i class="fa fa-times"></i> -->
+                                </div>
+                            </div>
+                            <div class="panel-body" >
+                                <div class="tab-wrapper tab-left ">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#graphView1" data-toggle="tab">图视图</a>
+                                        </li>
+                                        <li><a href="#tableView1" data-toggle="tab">表视图</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" style="height: 500px">
+                                        <div class="tab-pane active" id="graphView1">
+                                            <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher
+                                                retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi
+                                                qui.
+                                            </p>
+                                        </div>
+                                        <div class="tab-pane" id="tableView1">
+                                            <p>
+                                                Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo
+                                                enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS salvia yr, vero magna velit sapiente labore
+                                                stumptown. Vegan fanny pack odio cillum wes anderson 8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester stumptown, tumblr butcher vero sint qui sapiente
+                                                accusamus tattooed echo park.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-footer">
+                               
+                            </div>
+                            <div class="panel panel-default col-md-6 col-sm-6">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">节点信息</h3>
+                                    <div class="actions pull-right">
+                                        <i class="fa fa-expand"></i>
+                                        <i class="fa fa-chevron-down"></i>
+                                        <i id="hide_listView" class="fa fa-times"></i>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default col-md-6 col-sm-6">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">列表查看</h3>
+                                    <div class="actions pull-right">
+                                        <i class="fa fa-expand"></i>
+                                        <i class="fa fa-chevron-down"></i>
+                                        <i id="hide_listView" class="fa fa-times"></i>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        <div class="panel panel-default col-md-2 col-sm-2 listView animated fadeInUp">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">列表查看</h3>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-expand"></i>
+                                    <i class="fa fa-chevron-down"></i>
+                                    <i id="hide_listView" class="fa fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                
+                            </div>
+                            <div class="panel-footer">
+                               
+                            </div>
+                        </div>
+ 
+                    </div>
+              
+                </div>
+                </div>
+            </section>
+        </section>
+        <!--main content end-->
+    </section>
+    
+    <!--Config demo-->
+    <a href="javascript:void(0)" class="config-link closed"><i class="icon-settings"></i></a>
+    <div id="config" class="config hidden-xs">
+        <h4>Settings<a href="javascript:void(0)" class="config-link closed"><i class="icon-settings"></i></a></h4>
+        <div class="config-swatch-wrap">
+            <div class="row">
+                <div class="col-xs-6">
+                    <ul class="options">
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-default">
+                                <span class="header bg-white"></span>
+                                <span class="header bg-white"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-dark">
+                                <span class="header bg-dark"></span>
+                                <span class="header bg-white"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-blue">
+                                <span class="header bg-info"></span>
+                                <span class="header bg-white"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-blue-full">
+                                <span class="header bg-info"></span>
+                                <span class="header bg-info"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-grey">
+                                <span class="header bg-grey"></span>
+                                <span class="header bg-white"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-grey-full">
+                                <span class="header bg-grey"></span>
+                                <span class="header bg-grey"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-xs-6">
+                    <ul class="options">
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-dark-full">
+                                <span class="header bg-dark"></span>
+                                <span class="header bg-dark"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-green">
+                                <span class="header bg-green"></span>
+                                <span class="header bg-white"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-green-full">
+                                <span class="header bg-green"></span>
+                                <span class="header bg-green"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-red">
+                                <span class="header bg-red"></span>
+                                <span class="header bg-white"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-red-full">
+                                <span class="header bg-red"></span>
+                                <span class="header bg-red"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="theme-style-wrapper" data-theme="theme-dark-blue-full">
+                                <span class="header bg-dark-blue"></span>
+                                <span class="header bg-dark-blue"></span>
+                                <span class="nav bg-dark"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/Config demo-->
+    <!--Global JS-->
+    <script src="assets/js/vendor/jquery-1.11.1.min.js"></script>
+    <script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/navgoco/jquery.navgoco.min.js"></script>
+    <script src="assets/plugins/pace/pace.min.js"></script>
+    <script src="assets/plugins/fullscreen/jquery.fullscreen-min.js"></script>
+    <script src="assets/js/src/app.js"></script>
+    <!--Page Level JS-->
+    <script src="assets/plugins/countTo/jquery.countTo.js"></script>
+    <!-- Morris  -->
+    <script src="assets/plugins/morris/js/morris.min.js"></script>
+    <script src="assets/plugins/morris/js/raphael.2.1.0.min.js"></script>
+    <!-- Switch -->
+    <script src="assets/plugins/switchery/switchery.min.js"></script>
+    <!--Load these page level functions-->
+    <script>
+    $(document).ready(function() {
+        //app.dateRangePicker();
+        //app.chartJs();
+        //app.weather();
+        //app.spinStart();
+        //app.spinStop();
+    });
+    $(function () { 
+        $("[data-toggle='tooltip']").tooltip(); 
+        $(".dropdown-menu").on('click', function (e) {
+                e.stopPropagation();
+        });
+
+        $(".actions .fa-list-ol").on('click',function(){
+            if ($(".listView").hasClass('col-md-2 col-sm-2')) {
+                $(".listView").attr('class',"panel panel-default col-md-0 col-sm-0 listView animated fadeInUp");
+                $(".mainView").attr('class',"panel panel-default col-md-12 col-sm-12 mainView animated fadeInUp");
+            }else{
+                $(".listView").attr('class',"panel panel-default col-md-2 col-sm-2 listView animated fadeInUp");
+                $(".mainView").attr('class',"panel panel-default col-md-10 col-sm-10 mainView animated fadeInUp");
+            }
+            
+        })
+
+    });
+
+    //隐藏listView
+    $("#hide_listView").click(function(){
+        $(".listView").attr('class',"panel panel-default col-md-0 col-sm-0 listView animated fadeInUp");
+        $(".mainView").attr('class',"panel panel-default col-md-12 col-sm-12 mainView animated fadeInUp");
+    });
+    //当选项栏mining_model_select选项发生改变时，改变2级panel显示的内容
+    $("#mining_model_select").change(function(){
+        var model_name = $("#mining_model_select").find("option:selected").text();
+        //alert(model_name);
+        if (model_name=="标签传播") {
+            $("#bqcb_panel").toggle();
+        }
+    });
+    //当选项为标签传播时，选中复选框“使用标签栈”，则出现输入框
+    $("#use_label_stack_check").change(function () {
+        if($(this).is(':checked')){
+            $("#use_label_stack").show();
+        }else{
+            //alert("123");
+            $("#use_label_stack").toggle();
+        }
+    });
+    //挖掘模型选择栏隐藏
+    $("#hide_mining_model_select").click(function(){
+        //alert("123");
+        $("#model_choice_panel").attr('class','col-md-0 col-sm-0');
+        $("#model_show_panel").attr('class','col-md-12 col-sm-12');
+        $("#show_mining_model_select_div").show();
+        
+    });
+    $("#show_mining_model_select").click(function(){
+        $("#model_choice_panel").attr('class','col-md-2 col-sm-2');
+        $("#model_show_panel").attr('class','col-md-10 col-sm-10');
+        $("#show_mining_model_select_div").hide();
+    });
+
+
+    </script>
+</body>
+
+</html>
